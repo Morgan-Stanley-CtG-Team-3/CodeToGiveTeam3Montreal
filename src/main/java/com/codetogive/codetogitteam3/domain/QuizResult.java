@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "quiz_results")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class QuizzResult {
+public class QuizResult {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
