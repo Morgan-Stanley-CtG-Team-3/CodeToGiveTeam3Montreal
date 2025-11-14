@@ -4,11 +4,11 @@
 FROM node:18-alpine AS angular-build
 WORKDIR /app/frontend
   
-  # Copy Angular project files (when you have them)
-  # COPY frontend/package*.json ./
-  # RUN npm install
-  # COPY frontend/ ./
-  # RUN npm run build
+# Copy Angular project files (when you have them)
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
   
   # Stage 2: Build Spring Boot backend
 FROM maven:3.9-eclipse-temurin-21 AS backend-build
