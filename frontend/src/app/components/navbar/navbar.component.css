@@ -9,7 +9,7 @@
 }
 
 .navbar-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -36,10 +36,6 @@
 .logo-icon {
   font-size: 1.8rem;
   animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-.logo-text {
-  font-size: 1.5rem;
 }
 
 @keyframes heartbeat {
@@ -118,11 +114,7 @@
   box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
-.btn-donate:active {
-  transform: translateY(0);
-}
-
-/* Mobile Toggle Button */
+/* Mobile Toggle */
 .navbar-toggle {
   display: none;
   flex-direction: column;
@@ -141,7 +133,7 @@
   transition: all 0.3s ease;
 }
 
-/* Mobile Styles */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .navbar-toggle {
     display: flex;
@@ -194,7 +186,6 @@
     display: block;
   }
 
-  /* Hamburger Animation */
   .navbar-toggle.active .hamburger:nth-child(1) {
     transform: rotate(45deg) translate(7px, 7px);
   }
@@ -205,17 +196,5 @@
 
   .navbar-toggle.active .hamburger:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
-  }
-}
-
-/* Tablet Styles */
-@media (max-width: 1024px) {
-  .navbar-menu {
-    gap: 1rem;
-  }
-
-  .nav-item a {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
   }
 }
