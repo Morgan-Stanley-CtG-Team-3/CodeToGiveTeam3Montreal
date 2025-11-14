@@ -1,4 +1,7 @@
-package com.codetogive.codetogitteam3.domain;
+package com.codetogive.codetogitteam3.Mapper;
+
+import com.codetogive.codetogitteam3.DTO.DTOTransaction;
+import com.codetogive.codetogitteam3.domain.Transaction;
 
 public class TransactionMapper {
     public static DTOTransaction toDTO(Transaction transaction) {

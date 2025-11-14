@@ -1,4 +1,4 @@
-package com.codetogive.codetogitteam3.domain;
+package com.codetogive.codetogitteam3.DTO;
 
 public record DTOBadge(
     Long id,

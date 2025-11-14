@@ -1,4 +1,6 @@
-package com.codetogive.codetogitteam3.domain;
+package com.codetogive.codetogitteam3.DTO;
+
+import com.codetogive.codetogitteam3.domain.SubscriptionStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
