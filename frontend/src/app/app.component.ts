@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { QuizGameComponent } from './quiz-game/quiz-game.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [QuizGameComponent],
+  template: `
+    <div style="padding: 20px;">
+      <app-quiz-game></app-quiz-game>
+    </div>
+  `,
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'quiz-app';
 }

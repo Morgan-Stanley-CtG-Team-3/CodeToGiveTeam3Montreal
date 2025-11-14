@@ -1,0 +1,83 @@
+<div class="quiz-container">
+  <!-- Welcome Screen -->
+  <div *ngIf="!quizStarted" class="welcome-screen">
+    <h1>🎯 Jeu de Quiz</h1>
+    <p>Testez vos connaissances avec {{ questions.length }} questions!</p>
+    <button class="btn btn-primary" (click)="startQuiz()">
+      Commencer le Quiz
+    </button>
+  </div>
+
+  <!-- Quiz Questions -->
+  <div *ngIf="quizStarted && !showResult" class="quiz-screen">
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar" [style.width.%]="progress"></div>
+    </div>
+
+    <div class="question-info">
+      <span>Question {{ currentQuestionIndex + 1 }} / {{ questions.length }}</span>
+    </div>
+
+    <!-- Question -->
+    <div class="question-card">
+      <h2>{{ currentQuestion.question }}</h2>
+
+      <!-- Options -->
+      <div class="options-container">
+        <div
+          *ngFor="let option of currentQuestion.options; let i = index"
+          class="option"
+          [class.selected]="selectedAnswer === i"
+          (click)="selectAnswer(i)">
+          <span class="option-letter">{{ getOptionLetter(i) }}</span>
+          <span class="option-text">{{ option }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+      <button
+        class="btn btn-secondary"
+        (click)="previousQuestion()"
+        [disabled]="currentQuestionIndex === 0">
+        ← Précédent
+      </button>
+
+      <button
+        class="btn btn-primary"
+        (click)="nextQuestion()"
+        [disabled]="selectedAnswer === null">
+        {{ currentQuestionIndex === questions.length - 1 ? 'Terminer' : 'Suivant →' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Results Screen -->
+  <div *ngIf="showResult" class="result-screen">
+    <div class="result-card">
+      <h1>{{ scoreMessage }}</h1>
+
+      <div class="score-circle">
+        <div class="score-value">{{ score }} / {{ questions.length }}</div>
+        <div class="score-percentage">{{ scorePercentage }}%</div>
+      </div>
+
+      <div class="result-details">
+        <div class="result-item">
+          <span class="result-label">Réponses correctes:</span>
+          <span class="result-value correct">{{ score }}</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Réponses incorrectes:</span>
+          <span class="result-value incorrect">{{ questions.length - score }}</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" (click)="restartQuiz()">
+        🔄 Recommencer le Quiz
+      </button>
+    </div>
+  </div>
+</div>
