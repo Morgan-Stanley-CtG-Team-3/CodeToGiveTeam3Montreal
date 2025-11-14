@@ -1,8 +1,6 @@
 <div class="quiz-container">
   <!-- Welcome Screen -->
   <div *ngIf="!quizStarted" class="welcome-screen">
-    <h1>Quiz</h1>
-    <p>Test your knowledge with {{ questions.length }} questions!</p>
     <button class="btn btn-primary" (click)="startQuiz()">
       Start the Quiz!
     </button>
@@ -36,20 +34,39 @@
       </div>
     </div>
 
+    <!-- Feedback Message -->
+    <div *ngIf="showFeedback" class="feedback-message" [class.correct-feedback]="isCorrectAnswer(selectedAnswer!)" [class.wrong-feedback]="!isCorrectAnswer(selectedAnswer!)">
+        <span *ngIf="isCorrectAnswer(selectedAnswer!)">
+          🎉 Excellent! C'est la bonne réponse!
+        </span>
+      <span *ngIf="!isCorrectAnswer(selectedAnswer!)">
+          ❌ Oups! La bonne réponse était: {{ currentQuestion.options[currentQuestion.correctAnswer] }}
+        </span>
+    </div>
+  </div>
+
     <!-- Navigation Buttons -->
     <div class="navigation-buttons">
       <button
         class="btn btn-secondary"
         (click)="previousQuestion()"
         [disabled]="currentQuestionIndex === 0">
-        ← Previous
+        ← Précédent
       </button>
 
       <button
+        *ngIf="!answerSubmitted"
         class="btn btn-primary"
-        (click)="nextQuestion()"
+        (click)="submitAnswer()"
         [disabled]="selectedAnswer === null">
-        {{ currentQuestionIndex === questions.length - 1 ? 'End' : 'Next →' }}
+        Soumettre
+      </button>
+
+      <button
+        *ngIf="answerSubmitted"
+        class="btn btn-primary"
+        (click)="nextQuestion()">
+        {{ currentQuestionIndex === questions.length - 1 ? 'Voir les résultats' : 'Suivant →' }}
       </button>
     </div>
   </div>
@@ -66,7 +83,7 @@
 
       <div class="result-details">
         <div class="result-item">
-          <span class="result-label">Good answer :</span>
+          <span class="result-label">Good answer:</span>
           <span class="result-value correct">{{ score }}</span>
         </div>
         <div class="result-item">
@@ -80,4 +97,3 @@
       </button>
     </div>
   </div>
-</div>

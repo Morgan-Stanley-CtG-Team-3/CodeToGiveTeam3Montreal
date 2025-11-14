@@ -1,5 +1,5 @@
 .quiz-container {
-  max-width: 800px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,7 +9,7 @@
 .welcome-screen {
   text-align: center;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #4c4357;
   border-radius: 20px;
   color: white;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -55,7 +55,7 @@
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #764ba2 0%, #BEA8DA 100%);
   transition: width 0.3s ease;
 }
 
@@ -63,13 +63,13 @@
   text-align: center;
   color: #666;
   font-size: 0.9em;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   font-weight: 500;
 }
 
 /* Question Card */
 .question-card {
-  background: white;
+  background: #4c4357;
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -77,7 +77,7 @@
 }
 
 .question-card h2 {
-  color: #333;
+  color: white;
   font-size: 1.5em;
   margin-bottom: 30px;
   line-height: 1.6;
@@ -87,30 +87,69 @@
 .options-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
 }
 
 .option {
   display: flex;
   align-items: center;
-  padding: 20px;
-  background: #f8f9fa;
-  border: 2px solid #e0e0e0;
+  padding: 10px;
+  background: #9886ae;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .option:hover {
-  background: #e8f4ff;
   border-color: #667eea;
   transform: translateX(5px);
 }
 
 .option.selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #6b588e;
   border-color: #667eea;
   color: white;
+}
+
+.option.correct {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  border-color: #28a745;
+  color: white;
+  animation: correctPulse 0.5s ease;
+}
+
+.option.wrong {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  border-color: #dc3545;
+  color: white;
+  animation: wrongShake 0.5s ease;
+}
+
+.option.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option.disabled:hover {
+  transform: none;
+  background: #9886ae;
+  border-color: transparent;
+}
+
+.option.disabled.correct:hover,
+.option.disabled.wrong:hover {
+  transform: none;
+}
+
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
 .option-letter {
@@ -132,6 +171,18 @@
   color: #667eea;
 }
 
+.option.correct .option-letter,
+.option.wrong .option-letter {
+  background: white;
+  color: #333;
+}
+
+.feedback-icon {
+  margin-left: auto;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .option-text {
   font-size: 1.1em;
 }
@@ -143,12 +194,46 @@
   gap: 20px;
 }
 
+/* Feedback Message */
+.feedback-message {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: 500;
+  text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.correct-feedback {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border: 2px solid #28a745;
+}
+
+.wrong-feedback {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+  border: 2px solid #dc3545;
+}
+
 /* Buttons */
 .btn {
   padding: 15px 40px;
   font-size: 1.1em;
   border: none;
-  border-radius: 10px;
+  border-radius: 500px;
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -170,7 +255,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #BEA8DA;
   color: white;
 }
 
@@ -185,9 +270,9 @@
 }
 
 .result-card {
-  background: white;
+  background: #9886ae;
   padding: 50px;
-  border-radius: 20px;
+  border-radius: 50px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -195,7 +280,7 @@
 .result-card h1 {
   font-size: 2.5em;
   margin-bottom: 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: whitesmoke;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -205,14 +290,14 @@
   width: 200px;
   height: 200px;
   margin: 0 auto 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #BEA8DA;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 10px 30px #4c4357;
 }
 
 .score-value {
@@ -249,11 +334,11 @@
 }
 
 .result-value.correct {
-  color: #28a745;
+  color: whitesmoke;
 }
 
 .result-value.incorrect {
-  color: #dc3545;
+  color: whitesmoke;
 }
 
 /* Responsive Design */

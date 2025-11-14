@@ -20,7 +20,7 @@ export class QuizGameComponent implements OnInit {
     {
       id: 1,
       question: 'About what percentage of the population has experienced intimate partner violence in their lifetime?',
-      options: ['19%', '29%', ' 49%', ' 39%'],
+      options: ['19%', '29%', '39%', '49%'],
       correctAnswer: 1
     },
     {
@@ -49,6 +49,8 @@ export class QuizGameComponent implements OnInit {
   showResult: boolean = false;
   userAnswers: (number | null)[] = [];
   quizStarted: boolean = false;
+  answerSubmitted: boolean = false;
+  showFeedback: boolean = false;
 
   ngOnInit(): void {
     this.initializeQuiz();
@@ -64,26 +66,36 @@ export class QuizGameComponent implements OnInit {
     this.selectedAnswer = null;
     this.score = 0;
     this.showResult = false;
+    this.answerSubmitted = false;
+    this.showFeedback = false;
     this.initializeQuiz();
   }
 
   selectAnswer(optionIndex: number): void {
-    if (!this.showResult) {
+    if (!this.answerSubmitted) {
       this.selectedAnswer = optionIndex;
     }
   }
 
-  nextQuestion(): void {
-    if (this.selectedAnswer !== null) {
+  submitAnswer(): void {
+    if (this.selectedAnswer !== null && !this.answerSubmitted) {
+      this.answerSubmitted = true;
+      this.showFeedback = true;
       this.userAnswers[this.currentQuestionIndex] = this.selectedAnswer;
 
       if (this.selectedAnswer === this.questions[this.currentQuestionIndex].correctAnswer) {
         this.score++;
       }
+    }
+  }
 
+  nextQuestion(): void {
+    if (this.answerSubmitted) {
       if (this.currentQuestionIndex < this.questions.length - 1) {
         this.currentQuestionIndex++;
         this.selectedAnswer = this.userAnswers[this.currentQuestionIndex];
+        this.answerSubmitted = this.userAnswers[this.currentQuestionIndex] !== null;
+        this.showFeedback = this.answerSubmitted;
       } else {
         this.showResult = true;
       }
@@ -92,9 +104,10 @@ export class QuizGameComponent implements OnInit {
 
   previousQuestion(): void {
     if (this.currentQuestionIndex > 0) {
-      this.userAnswers[this.currentQuestionIndex] = this.selectedAnswer;
       this.currentQuestionIndex--;
       this.selectedAnswer = this.userAnswers[this.currentQuestionIndex];
+      this.answerSubmitted = this.userAnswers[this.currentQuestionIndex] !== null;
+      this.showFeedback = this.answerSubmitted;
     }
   }
 
@@ -113,7 +126,6 @@ export class QuizGameComponent implements OnInit {
   get scorePercentage(): number {
     return (this.score / this.questions.length) * 100;
   }
-
   get scoreMessage(): string {
     const percentage = this.scorePercentage;
     if (percentage === 100) return 'Perfect!';
@@ -125,5 +137,19 @@ export class QuizGameComponent implements OnInit {
 
   getOptionLetter(index: number): string {
     return String.fromCharCode(65 + index);
+  }
+
+  isCorrectAnswer(optionIndex: number): boolean {
+    return optionIndex === this.questions[this.currentQuestionIndex].correctAnswer;
+  }
+
+  isWrongAnswer(optionIndex: number): boolean {
+    return this.answerSubmitted &&
+      this.selectedAnswer === optionIndex &&
+      optionIndex !== this.questions[this.currentQuestionIndex].correctAnswer;
+  }
+
+  shouldShowCorrect(optionIndex: number): boolean {
+    return this.answerSubmitted && this.isCorrectAnswer(optionIndex);
   }
 }
