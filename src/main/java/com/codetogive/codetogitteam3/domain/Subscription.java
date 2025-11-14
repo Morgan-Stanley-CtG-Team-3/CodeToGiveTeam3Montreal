@@ -29,12 +29,15 @@ public class Subscription {
     @Column(precision = 10, scale = 2)
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private SubscriptionStatus status;
+    @Enumerated(EnumType.STRING) @Column(nullable = false)
+    private Tier tier;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
+
+    @Column(name = "started_at")
+    private LocalDateTime startedAt;
 
     @Column(name = "canceled_at")
     private LocalDateTime canceledAt;
@@ -45,15 +48,19 @@ public class Subscription {
 
     //region Constructor
     @Builder
-    public Subscription(User user, BigDecimal amount, SubscriptionStatus status) {
+    public Subscription(User user, BigDecimal amount, Status status) {
         this.user = user;
         this.amount = amount;
         this.status = status;
     }
     //endregion
 
+    public enum Tier { GARDIEN, PROTECTEUR, CHAMPION, PILIER }
+    public enum Status { ACTIVE, CANCELED }
+
     @PrePersist
     protected void onCreate() {
-        if(this.createdAt == null) this.createdAt = LocalDateTime.now();
+        if (status == null) status = Status.ACTIVE;
+        if(this.startedAt == null) this.startedAt = LocalDateTime.now();
     }
 }

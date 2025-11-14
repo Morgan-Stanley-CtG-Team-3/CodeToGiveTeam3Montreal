@@ -1,15 +1,15 @@
-package com.codetogive.codetogitteam3.Mapper;
+package com.codetogive.codetogitteam3.mapper;
 
-import com.codetogive.codetogitteam3.DTO.DTOUser;
+import com.codetogive.codetogitteam3.dto.UserDTO;
 import com.codetogive.codetogitteam3.domain.User;
 
 public class UserMapper {
-    public static DTOUser toDTO(User user) {
+    public static UserDTO toDTO(User user) {
         if (user == null) {
             return null;
         }
 
-        return new DTOUser(
+        return new UserDTO(
                 user.getId(),
                 user.getEmail(),
                 user.getDisplayName(),
@@ -18,7 +18,7 @@ public class UserMapper {
                 user.getCreatedAt()
         );
     }
-    public static User toEntity(DTOUser dto) {
+    public static User toEntity(UserDTO dto) {
         if (dto == null) {
             return null;
         }
@@ -31,18 +31,11 @@ public class UserMapper {
                 .build();
     }
 
-    public static void upddateEntity(DTOUser dto, User user) {
-        if (dto.email()!=null) {
-            user.setEmail(dto.email());
-        }
-        if (dto.displayName()!=null) {
-            user.setDisplayName(dto.displayName());
-        }
-        if (dto.firstName()!=null) {
-            user.setFirstName(dto.firstName());
-        }
-        if (dto.lastName()!=null) {
-            user.setLastName(dto.lastName());
-        }
+    public static void updateEntity(UserDTO dto, User user) {
+        if (dto == null || user == null) return;
+        if (dto.email() != null) user.setEmail(dto.email());
+        if (dto.displayName() != null) user.setDisplayName(dto.displayName());
+        if (dto.firstName() != null) user.setFirstName(dto.firstName());
+        if (dto.lastName() != null) user.setLastName(dto.lastName());
     }
 }

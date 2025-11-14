@@ -1,15 +1,15 @@
-package com.codetogive.codetogitteam3.Mapper;
+package com.codetogive.codetogitteam3.mapper;
 
-import com.codetogive.codetogitteam3.DTO.DTOSubscription;
+import com.codetogive.codetogitteam3.dto.SubscriptionDTO;
 import com.codetogive.codetogitteam3.domain.Subscription;
 
 public class SubscriptionMapper {
-    public static DTOSubscription toDTO(Subscription sub) {
+    public static SubscriptionDTO toDTO(Subscription sub) {
         if (sub == null) {
             return null;
         }
 
-        return new DTOSubscription(
+        return new SubscriptionDTO(
                 sub.getId(),
                 sub.getUser() != null ? sub.getUser().getId() : null,
                 sub.getAmount(),

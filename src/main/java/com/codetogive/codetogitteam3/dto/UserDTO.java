@@ -1,8 +1,8 @@
-package com.codetogive.codetogitteam3.DTO;
+package com.codetogive.codetogitteam3.dto;
 
 import java.time.LocalDate;
 
-public record DTOUser (
+public record UserDTO(
         Long id,
         String email,
         String displayName,

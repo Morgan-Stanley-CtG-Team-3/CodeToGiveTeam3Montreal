@@ -1,6 +1,6 @@
-package com.codetogive.codetogitteam3.DTO;
+package com.codetogive.codetogitteam3.dto;
 
-public record DTOBadge(
+public record BadgeDTO(
     Long id,
     String name,
     String description,

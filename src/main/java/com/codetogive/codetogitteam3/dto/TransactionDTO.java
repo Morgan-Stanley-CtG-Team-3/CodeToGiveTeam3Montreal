@@ -1,9 +1,9 @@
-package com.codetogive.codetogitteam3.DTO;
+package com.codetogive.codetogitteam3.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record DTOTransaction(
+public record TransactionDTO(
     Long id,
     Long userId,
     Long subscriptionId,

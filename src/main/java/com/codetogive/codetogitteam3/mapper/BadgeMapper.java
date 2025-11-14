@@ -1,15 +1,15 @@
-package com.codetogive.codetogitteam3.Mapper;
+package com.codetogive.codetogitteam3.mapper;
 
-import com.codetogive.codetogitteam3.DTO.DTOBadge;
+import com.codetogive.codetogitteam3.dto.BadgeDTO;
 import com.codetogive.codetogitteam3.domain.Badge;
 
 public class BadgeMapper {
-    public static DTOBadge toDTO(Badge badge) {
+    public static BadgeDTO toDTO(Badge badge) {
         if (badge == null) {
             return null;
         }
 
-        return new DTOBadge(
+        return new BadgeDTO(
                 badge.getId(),
                 badge.getName(),
                 badge.getDescription(),
@@ -17,7 +17,7 @@ public class BadgeMapper {
         );
     }
 
-    public static Badge toEntity (DTOBadge dto) {
+    public static Badge toEntity (BadgeDTO dto) {
         if (dto == null) {
             return null;
         }
@@ -29,7 +29,7 @@ public class BadgeMapper {
                 .build();
     }
 
-    public static void  updateEntity(Badge badge, DTOBadge dto) {
+    public static void  updateEntity(Badge badge, BadgeDTO dto) {
         if (dto.name()!= null) {
             badge.setName(dto.name());
         }
