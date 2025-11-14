@@ -42,6 +42,9 @@ public class Subscription {
     @Column(name = "canceled_at")
     private LocalDateTime canceledAt;
 
+    @Column(nullable = false)
+    private double cumulativeTotal;
+
     @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions = new ArrayList<>();
     //endregion
