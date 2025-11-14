@@ -37,10 +37,10 @@
     <!-- Feedback Message -->
     <div *ngIf="showFeedback" class="feedback-message" [class.correct-feedback]="isCorrectAnswer(selectedAnswer!)" [class.wrong-feedback]="!isCorrectAnswer(selectedAnswer!)">
         <span *ngIf="isCorrectAnswer(selectedAnswer!)">
-          🎉 Excellent! C'est la bonne réponse!
+          Right answer!
         </span>
       <span *ngIf="!isCorrectAnswer(selectedAnswer!)">
-          ❌ Oups! La bonne réponse était: {{ currentQuestion.options[currentQuestion.correctAnswer] }}
+          Wrong answer: {{ currentQuestion.options[currentQuestion.correctAnswer] }}
         </span>
     </div>
   </div>
