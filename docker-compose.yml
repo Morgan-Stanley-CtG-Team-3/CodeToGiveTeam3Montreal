@@ -3,6 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+    restart: unless-stopped
     image: shield-of-athena-app:latest
     container_name: shield-of-athena-app
     ports:
@@ -23,9 +27,6 @@ services:
       # STRIPE_SUCCESS_URL: http://localhost:8080/donation-success?session_id={CHECKOUT_SESSION_ID}
       # STRIPE_CANCEL_URL: http://localhost:8080/donation-cancelled
 
-    depends_on:
-      - db
-    restart: unless-stopped
 
   db:
     image: mysql:8.0-debian
