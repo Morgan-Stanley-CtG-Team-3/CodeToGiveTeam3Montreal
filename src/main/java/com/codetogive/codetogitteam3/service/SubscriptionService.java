@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class SubscriptionService {
   public void processMonthlyCharge() {
     List<Subscription> actives = repo.findByStatus(Status.ACTIVE);
     for (Subscription s : actives) {
-      s.setCumulativeTotal(s.getCumulativeTotal() + s.getAmount());
+      s.setCumulativeTotal(s.getCumulativeTotal() + s.getAmount().doubleValue());
       checkMilestones(s);
     }
   }
