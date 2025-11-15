@@ -1,6 +1,6 @@
 package com.codetogive.codetogitteam3.controller;
 
-
+import com.codetogive.codetogitteam3.domain.Donation;
 import com.codetogive.codetogitteam3.domain.DonationEvent;
 import com.codetogive.codetogitteam3.service.DonationEventService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,8 @@ public class DonationEventController {
   }
 
   @PostMapping("/{id}/donate")
-  public ResponseEntity<DonationEvent> donate(@PathVariable Long id, @RequestParam double amount) {
-    return ResponseEntity.ok(service.donate(id, amount));
+  public ResponseEntity<Donation> donate(@PathVariable Long id, @RequestParam String donorName,
+      @RequestParam String email, @RequestParam double amount) {
+    return ResponseEntity.ok(service.donate(id, donorName, email, amount));
   }
 }
