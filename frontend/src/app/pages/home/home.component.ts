@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { PageComponent } from '../../components/page/page.component';
 import { Router } from '@angular/router';
+import { QuizGameComponent } from '../../quiz-game/quiz-game.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PageComponent],
+  imports: [PageComponent, QuizGameComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent {
   constructor(private router: Router) {}
