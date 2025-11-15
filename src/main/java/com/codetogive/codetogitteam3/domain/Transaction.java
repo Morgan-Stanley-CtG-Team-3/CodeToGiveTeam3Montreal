@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = {"user", "subscription"})
+@ToString(exclude = {"user", "subscription", "event"})
 public class Transaction {
     //region Attributes
     @Id
@@ -28,6 +28,10 @@ public class Transaction {
     @JoinColumn(name = "subscription_id")
     private Subscription subscription;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
+    private DonationEvent event;
+
     @NotNull
     @Column(precision = 10, scale = 2)
     private BigDecimal amount;
@@ -41,9 +45,11 @@ public class Transaction {
 
     //region Constructor
     @Builder
-    public Transaction(User user, Subscription subscription, BigDecimal amount, Boolean anonymous) {
+    public Transaction(User user, Subscription subscription, DonationEvent event, BigDecimal amount,
+                       Boolean anonymous) {
         this.user = user;
         this.subscription = subscription;
+        this.event = event;
         this.amount = amount;
         this.anonymous = (anonymous != null) ? anonymous : Boolean.FALSE;
     }
