@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
-  Optional<Subscription> findByEmailAndStatus(String email, Status status);
+  Optional<Subscription> findByUser_EmailAndStatus(String email, Status status);
   List<Subscription> findByStatus(Status status);
 }

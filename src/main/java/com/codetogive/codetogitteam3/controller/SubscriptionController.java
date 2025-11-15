@@ -1,5 +1,12 @@
 package com.codetogive.codetogitteam3.controller;
 
+import com.codetogive.codetogitteam3.domain.Subscription;
+import com.codetogive.codetogitteam3.dto.CreateSubscriptionRequest;
+import com.codetogive.codetogitteam3.dto.SubscriptionDTO;
+import com.codetogive.codetogitteam3.repository.SubscriptionRepository;
+import com.codetogive.codetogitteam3.service.SubscriptionService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,36 +15,23 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/api/subscriptions")
+@RequiredArgsConstructor
 public class SubscriptionController {
+    private final SubscriptionService subscriptionService;
 
-  static class SubscriptionDTO {
-    public String tier; // Gardien / Protecteur / Champion / Pilier
-    public double amount;
-    public String email;
-    public String status; // ACTIVE / CANCELED
-  }
+    @PostMapping
+    public ResponseEntity<SubscriptionDTO> create(@RequestBody @Valid CreateSubscriptionRequest req) {
+        return ResponseEntity.ok(subscriptionService.create(req));
+    }
 
-  private final Map<String, SubscriptionDTO> byEmail = new ConcurrentHashMap<>();
+    @DeleteMapping
+    public ResponseEntity<Void> cancel(@RequestParam String email) {
+        subscriptionService.cancel(email);
+        return ResponseEntity.noContent().build();
+    }
 
-  @PostMapping
-  public ResponseEntity<SubscriptionDTO> create(@RequestBody SubscriptionDTO dto) {
-    dto.status = "ACTIVE";
-    byEmail.put(dto.email, dto);
-    return ResponseEntity.ok(dto);
-  }
-
-  @DeleteMapping
-  public ResponseEntity<Void> cancel(@RequestParam String email) {
-    SubscriptionDTO dto = byEmail.get(email);
-    if (dto == null) return ResponseEntity.notFound().build();
-    dto.status = "CANCELED";
-    return ResponseEntity.noContent().build();
-  }
-
-  @GetMapping
-  public ResponseEntity<SubscriptionDTO> get(@RequestParam String email) {
-    SubscriptionDTO dto = byEmail.get(email);
-    if (dto == null) return ResponseEntity.notFound().build();
-    return ResponseEntity.ok(dto);
-  }
+    @GetMapping
+    public ResponseEntity<SubscriptionDTO> get(@RequestParam String email) {
+        return ResponseEntity.ok(subscriptionService.get(email));
+    }
 }
