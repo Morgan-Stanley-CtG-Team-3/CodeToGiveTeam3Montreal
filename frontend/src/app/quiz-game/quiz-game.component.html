@@ -1,13 +1,6 @@
 <div class="quiz-container">
-  <!-- Welcome Screen -->
-  <div *ngIf="!quizStarted" class="welcome-screen">
-    <button class="btn btn-primary" (click)="startQuiz()">
-      Start the Quiz!
-    </button>
-  </div>
-
   <!-- Quiz Questions -->
-  <div *ngIf="quizStarted && !showResult" class="quiz-screen">
+  <div *ngIf="!showResult" class="quiz-screen">
     <!-- Progress Bar -->
     <div class="progress-container">
       <div class="progress-bar" [style.width.%]="progress"></div>
@@ -26,24 +19,28 @@
         <div
           *ngFor="let option of currentQuestion.options; let i = index"
           class="option"
-          [class.selected]="selectedAnswer === i"
+          [class.selected]="selectedAnswer === i && !answerSubmitted"
+          [class.correct]="shouldShowCorrect(i)"
+          [class.wrong]="isWrongAnswer(i)"
+          [class.disabled]="answerSubmitted"
           (click)="selectAnswer(i)">
           <span class="option-letter">{{ getOptionLetter(i) }}</span>
           <span class="option-text">{{ option }}</span>
+          <span *ngIf="shouldShowCorrect(i)" class="feedback-icon">✓</span>
+          <span *ngIf="isWrongAnswer(i)" class="feedback-icon">✗</span>
         </div>
       </div>
-    </div>
 
-    <!-- Feedback Message -->
-    <div *ngIf="showFeedback" class="feedback-message" [class.correct-feedback]="isCorrectAnswer(selectedAnswer!)" [class.wrong-feedback]="!isCorrectAnswer(selectedAnswer!)">
+      <!-- Feedback Message -->
+      <div *ngIf="showFeedback" class="feedback-message" [class.correct-feedback]="isCorrectAnswer(selectedAnswer!)" [class.wrong-feedback]="!isCorrectAnswer(selectedAnswer!)">
         <span *ngIf="isCorrectAnswer(selectedAnswer!)">
-          Right answer!
+          Excellent!
         </span>
-      <span *ngIf="!isCorrectAnswer(selectedAnswer!)">
-          Wrong answer: {{ currentQuestion.options[currentQuestion.correctAnswer] }}
+        <span *ngIf="!isCorrectAnswer(selectedAnswer!)">
+          Oups! The right answer was: {{ currentQuestion.options[currentQuestion.correctAnswer] }}
         </span>
+      </div>
     </div>
-  </div>
 
     <!-- Navigation Buttons -->
     <div class="navigation-buttons">
@@ -51,7 +48,7 @@
         class="btn btn-secondary"
         (click)="previousQuestion()"
         [disabled]="currentQuestionIndex === 0">
-        ← Précédent
+        ← Previous
       </button>
 
       <button
@@ -59,14 +56,14 @@
         class="btn btn-primary"
         (click)="submitAnswer()"
         [disabled]="selectedAnswer === null">
-        Soumettre
+        Submit
       </button>
 
       <button
         *ngIf="answerSubmitted"
         class="btn btn-primary"
         (click)="nextQuestion()">
-        {{ currentQuestionIndex === questions.length - 1 ? 'Voir les résultats' : 'Suivant →' }}
+        {{ currentQuestionIndex === questions.length - 1 ? 'See results' : 'NextT →' }}
       </button>
     </div>
   </div>
@@ -83,17 +80,18 @@
 
       <div class="result-details">
         <div class="result-item">
-          <span class="result-label">Good answer:</span>
+          <span class="result-label">Right answer:</span>
           <span class="result-value correct">{{ score }}</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Wrong Answer:</span>
+          <span class="result-label">Wrong answer:</span>
           <span class="result-value incorrect">{{ questions.length - score }}</span>
         </div>
       </div>
 
       <button class="btn btn-primary" (click)="restartQuiz()">
-        🔄 Restart quiz
+        Retake the Quiz?
       </button>
     </div>
   </div>
+</div>

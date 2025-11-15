@@ -19,27 +19,33 @@ export class QuizGameComponent implements OnInit {
   questions: QuizQuestion[] = [
     {
       id: 1,
-      question: 'About what percentage of the population has experienced intimate partner violence in their lifetime?',
-      options: ['19%', '29%', '39%', '49%'],
-      correctAnswer: 1
+      question: 'Quelle est la capitale de la France?',
+      options: ['Berlin', 'Madrid', 'Paris', 'Rome'],
+      correctAnswer: 2
     },
     {
       id: 2,
-      question: 'Which of these factors significantly increases the risk of intimate partner homicide or familicide when domestic violence is present?',
-      options: ['Strangulation', 'Stalking', 'Access to firearms', 'All of the above'],
-      correctAnswer: 3
+      question: 'Combien de continents y a-t-il sur Terre?',
+      options: ['5', '6', '7', '8'],
+      correctAnswer: 2
     },
     {
       id: 3,
-      question: 'How many survivors delay leaving an abusive relationship because they\'re afraid of being separated from their pets?',
-      options: ['1 in 3', '1 in 5', '1 in 7', '1 in 10'],
+      question: 'Quel est le plus grand océan du monde?',
+      options: ['Océan Atlantique', 'Océan Pacifique', 'Océan Indien', 'Océan Arctique'],
       correctAnswer: 1
     },
     {
       id: 4,
-      question: 'What percentage of domestic violence cases include financial abuse?',
-      options: ['Less than 50%', 'About 75%', 'about 80%', 'Over 95%'],
-      correctAnswer: 3
+      question: 'En quelle année a eu lieu la Révolution française?',
+      options: ['1789', '1776', '1804', '1815'],
+      correctAnswer: 0
+    },
+    {
+      id: 5,
+      question: 'Quelle planète est connue comme la planète rouge?',
+      options: ['Vénus', 'Jupiter', 'Mars', 'Saturne'],
+      correctAnswer: 2
     }
   ];
 
@@ -48,7 +54,6 @@ export class QuizGameComponent implements OnInit {
   score: number = 0;
   showResult: boolean = false;
   userAnswers: (number | null)[] = [];
-  quizStarted: boolean = false;
   answerSubmitted: boolean = false;
   showFeedback: boolean = false;
 
@@ -60,8 +65,7 @@ export class QuizGameComponent implements OnInit {
     this.userAnswers = new Array(this.questions.length).fill(null);
   }
 
-  startQuiz(): void {
-    this.quizStarted = true;
+  restartQuiz(): void {
     this.currentQuestionIndex = 0;
     this.selectedAnswer = null;
     this.score = 0;
@@ -111,10 +115,6 @@ export class QuizGameComponent implements OnInit {
     }
   }
 
-  restartQuiz(): void {
-    this.startQuiz();
-  }
-
   get currentQuestion(): QuizQuestion {
     return this.questions[this.currentQuestionIndex];
   }
@@ -126,13 +126,14 @@ export class QuizGameComponent implements OnInit {
   get scorePercentage(): number {
     return (this.score / this.questions.length) * 100;
   }
+
   get scoreMessage(): string {
     const percentage = this.scorePercentage;
     if (percentage === 100) return 'Perfect!';
     if (percentage >= 80) return 'Excellent!';
-    if (percentage >= 60) return 'Well played!';
-    if (percentage >= 40) return 'Not bad!';
-    return 'Thank you!';
+    if (percentage >= 60) return 'Well done!';
+    if (percentage >= 40) return 'Not Bad!';
+    return '';
   }
 
   getOptionLetter(index: number): string {
@@ -145,8 +146,8 @@ export class QuizGameComponent implements OnInit {
 
   isWrongAnswer(optionIndex: number): boolean {
     return this.answerSubmitted &&
-      this.selectedAnswer === optionIndex &&
-      optionIndex !== this.questions[this.currentQuestionIndex].correctAnswer;
+           this.selectedAnswer === optionIndex &&
+           optionIndex !== this.questions[this.currentQuestionIndex].correctAnswer;
   }
 
   shouldShowCorrect(optionIndex: number): boolean {
