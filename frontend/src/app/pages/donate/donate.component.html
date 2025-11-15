@@ -1,5 +1,15 @@
 <div class="min-h-screen bg-gradient-to-br from-purple-100 to-purple-200 py-12 px-4">
   <div class="max-w-md mx-auto">
+    <!-- Back Button -->
+    <button 
+      (click)="goToHome()"
+      class="mb-4 flex items-center gap-2 text-[#4c4357] hover:text-[#BEA8DA] transition-colors font-medium group">
+      <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      Retour à l'accueil
+    </button>
+
     <!-- Header -->
     <div class="text-center bg-[#4c4357] text-white p-12 rounded-3xl mb-6 shadow-lg">
       <h1 class="text-4xl font-bold mb-3">💝 Don</h1>
@@ -49,7 +59,7 @@
               [value]="cause.percentage"
               (input)="onSliderChange(cause, $event)"
               class="w-full h-2 rounded-full appearance-none cursor-pointer slider"
-              [style.--slider-color]="cause.color">
+              >
           </div>
 
           <!-- Percentage Display -->

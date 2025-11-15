@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface Cause {
   id: number;
@@ -27,6 +28,8 @@ export class DonateComponent implements OnInit {
   newCauseName: string = '';
   showAddCause: boolean = false;
   remainingPercentage: number = 0;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.calculateRemaining();
@@ -147,5 +150,9 @@ export class DonateComponent implements OnInit {
     });
     
     alert(`Merci pour votre don de ${this.formatCurrency(this.totalAmount)}$ !`);
+  }
+
+  goToHome(): void {
+    this.router.navigate(['/']);
   }
 }
