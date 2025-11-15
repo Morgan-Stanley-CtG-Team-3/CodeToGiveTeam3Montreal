@@ -21,32 +21,30 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @NotNull
-    @Column(nullable = false)
-    private String email;
-
-    @NotNull
     @Column(precision = 10, scale = 2)
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING) @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
     private Tier tier;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private Status status;
 
-    @Column(name = "started_at")
+    @Column(name = "started_at", nullable = false, updatable = false)
     private LocalDateTime startedAt;
 
     @Column(name = "canceled_at")
     private LocalDateTime canceledAt;
 
-    @Column(nullable = false)
+    @Column(name = "cumulative_total", nullable = false)
     private double cumulativeTotal;
 
     @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -55,19 +53,24 @@ public class Subscription {
 
     //region Constructor
     @Builder
-    public Subscription(User user, BigDecimal amount, Status status) {
+    public Subscription(User user, BigDecimal amount, Tier tier, Status status) {
         this.user = user;
         this.amount = amount;
+        this.tier = tier;
         this.status = status;
     }
     //endregion
 
+    //region Enums
     public enum Tier { GARDIEN, PROTECTEUR, CHAMPION, PILIER }
     public enum Status { ACTIVE, CANCELED }
+    //endregion
 
+    //region Methods
     @PrePersist
     protected void onCreate() {
         if (status == null) status = Status.ACTIVE;
-        if(this.startedAt == null) this.startedAt = LocalDateTime.now();
+        if (this.startedAt == null) this.startedAt = LocalDateTime.now();
     }
+    //endregion
 }

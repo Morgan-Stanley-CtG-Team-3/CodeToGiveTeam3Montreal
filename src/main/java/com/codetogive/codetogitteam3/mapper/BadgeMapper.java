@@ -29,7 +29,7 @@ public class BadgeMapper {
                 .build();
     }
 
-    public static void  updateEntity(Badge badge, BadgeDTO dto) {
+    public static void updateEntity(Badge badge, BadgeDTO dto) {
         if (dto.name()!= null) {
             badge.setName(dto.name());
         }
