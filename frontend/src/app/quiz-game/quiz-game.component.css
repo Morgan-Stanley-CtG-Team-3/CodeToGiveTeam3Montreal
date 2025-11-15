@@ -174,7 +174,7 @@
 .option.correct .option-letter,
 .option.wrong .option-letter {
   background: white;
-  color: #333;
+  color: whitesmoke;
 }
 
 .feedback-icon {
@@ -324,7 +324,7 @@
 }
 
 .result-label {
-  color: #666;
+  color: darkslategrey;
   font-size: 0.9em;
 }
 
