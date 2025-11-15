@@ -31,7 +31,7 @@ public class Subscription {
 
     @NotNull
     @Column(precision = 10, scale = 2)
-    private double amount;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING) @Column(nullable = false)
     private Tier tier;
@@ -55,7 +55,7 @@ public class Subscription {
 
     //region Constructor
     @Builder
-    public Subscription(User user, double amount, Status status) {
+    public Subscription(User user, BigDecimal amount, Status status) {
         this.user = user;
         this.amount = amount;
         this.status = status;
