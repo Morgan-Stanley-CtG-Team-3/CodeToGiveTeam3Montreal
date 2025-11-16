@@ -1,8 +1,117 @@
 <div class="w-full max-w-4xl mx-auto p-6">
-  <!-- Donation Amount Selection -->
-  <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
-    <h2 class="text-3xl font-bold text-gray-900 mb-2">Make Your Impact</h2>
-    <p class="text-gray-600 mb-8">Choose an amount or enter a custom donation</p>
+  
+  <!-- Authentication Options (shown if not logged in and not in guest mode) -->
+  <div *ngIf="showAuthOptions && !isLoggedIn" class="bg-gradient-to-r from-primary-100 to-primary-200 rounded-2xl shadow-lg p-8 mb-6 border-2 border-primary-300">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-primary-900 mb-3">Faire un don</h2>
+      <p class="text-xl text-primary-800">Choisissez comment vous souhaitez continuer</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <!-- Login Option -->
+      <div class="bg-white rounded-xl p-6 border-2 border-primary-300 hover:border-primary-500 transition-all hover:shadow-lg">
+        <div class="text-center mb-4">
+          <div class="text-5xl mb-3">👤</div>
+          <h3 class="text-2xl font-bold text-primary-900 mb-2">J'ai déjà un compte</h3>
+          <p class="text-lg text-primary-700 mb-4">
+            Connectez-vous pour utiliser vos informations enregistrées
+          </p>
+        </div>
+        <ul class="text-primary-800 mb-4 space-y-2">
+          <li class="flex items-start gap-2">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span class="text-lg">Informations pré-remplies</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span class="text-lg">Historique de dons</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span class="text-lg">Reçus fiscaux</span>
+          </li>
+        </ul>
+        <button
+          (click)="goToLogin()"
+          class="w-full bg-primary-700 hover:bg-primary-800 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-500 text-lg">
+          Se connecter
+        </button>
+      </div>
+
+      <!-- Signup Option -->
+      <div class="bg-white rounded-xl p-6 border-2 border-primary-300 hover:border-primary-500 transition-all hover:shadow-lg">
+        <div class="text-center mb-4">
+          <div class="text-5xl mb-3">✨</div>
+          <h3 class="text-2xl font-bold text-primary-900 mb-2">Créer un compte</h3>
+          <p class="text-lg text-primary-700 mb-4">
+            Inscrivez-vous pour suivre vos dons et votre impact
+          </p>
+        </div>
+        <ul class="text-primary-800 mb-4 space-y-2">
+          <li class="flex items-start gap-2">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span class="text-lg">Badges et récompenses</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span class="text-lg">Suivi d'impact</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary-600 text-xl">✓</span>
+            <span class="text-lg">Classement des donateurs</span>
+          </li>
+        </ul>
+        <button
+          (click)="goToSignup()"
+          class="w-full bg-primary-700 hover:bg-primary-800 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-500 text-lg">
+          S'inscrire
+        </button>
+      </div>
+    </div>
+
+    <!-- Guest Option -->
+    <div class="text-center">
+      <div class="relative my-6">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t-2 border-primary-300"></div>
+        </div>
+        <div class="relative flex justify-center">
+          <span class="bg-gradient-to-r from-primary-100 to-primary-200 px-6 text-lg text-primary-800 font-medium">ou</span>
+        </div>
+      </div>
+      
+      <button
+        (click)="continueAsGuest()"
+        class="inline-flex items-center gap-2 bg-white hover:bg-primary-50 text-primary-800 font-semibold py-4 px-8 rounded-xl border-2 border-primary-400 hover:border-primary-600 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-500 text-lg">
+        <span>🎁</span>
+        <span>Continuer en tant qu'invité</span>
+      </button>
+      <p class="mt-3 text-lg text-primary-700">
+        Vous pouvez faire un don sans créer de compte
+      </p>
+    </div>
+  </div>
+
+  <!-- Logged In Welcome Message -->
+  <div *ngIf="isLoggedIn" class="bg-gradient-to-r from-primary-300 to-primary-400 rounded-2xl shadow-lg p-6 mb-6 border-2 border-primary-500">
+    <div class="flex items-center gap-4">
+      <div class="text-5xl">👋</div>
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-primary-900 mb-1">
+          Bienvenue, {{userName || userEmail}}!
+        </h2>
+        <p class="text-lg text-primary-800">
+          Vos informations sont déjà pré-remplies pour faciliter votre don
+        </p>
+      </div>
+      <div class="text-4xl">🛡️</div>
+    </div>
+  </div>
+
+  <!-- Donation Amount Selection (always shown after auth choice) -->
+  <div *ngIf="!showAuthOptions" class="bg-primary-50 rounded-2xl shadow-lg p-8 mb-6">
+    <h2 class="text-3xl font-bold text-primary-900 mb-2">Faites votre impact</h2>
+    <p class="text-xl text-primary-700 mb-8">Choisissez un montant ou entrez un don personnalisé</p>
 
     <!-- Preset Amount Buttons -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -10,15 +119,15 @@
         *ngFor="let amount of presetAmounts"
         (click)="selectAmount(amount)"
         [class.ring-4]="selectedAmount === amount"
-        [class.ring-red-500]="selectedAmount === amount"
-        [class.bg-red-50]="selectedAmount === amount"
-        class="relative p-6 rounded-xl border-2 border-gray-200 hover:border-red-400 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-500"
+        [class.ring-primary-600]="selectedAmount === amount"
+        [class.bg-primary-200]="selectedAmount === amount"
+        class="relative p-6 rounded-xl border-2 border-primary-200 hover:border-primary-500 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-500 min-h-btn"
         [attr.aria-pressed]="selectedAmount === amount"
-        [attr.aria-label]="'Donate ' + amount + ' dollars'">
-        <div class="text-2xl font-bold text-gray-900">${{amount}}</div>
-        <div class="text-sm text-gray-600 mt-1">{{getImpactText(amount)}}</div>
+        [attr.aria-label]="'Faire un don de ' + amount + ' dollars'">
+        <div class="text-2xl font-bold text-primary-900">${{amount}}</div>
+        <div class="text-lg text-primary-700 mt-1">{{getImpactText(amount)}}</div>
         <div *ngIf="selectedAmount === amount"
-             class="absolute top-2 right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"
+             class="absolute top-2 right-2 w-6 h-6 bg-primary-700 rounded-full flex items-center justify-center"
              aria-hidden="true">
           <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -29,11 +138,11 @@
 
     <!-- Custom Amount Input -->
     <div class="mb-6">
-      <label for="customAmount" class="block text-sm font-semibold text-gray-700 mb-2">
-        Or enter a custom amount
+      <label for="customAmount" class="block text-lg font-semibold text-primary-800 mb-2">
+        Ou entrez un montant personnalisé
       </label>
       <div class="relative">
-        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xl font-semibold">$</span>
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-primary-600 text-xl font-semibold">$</span>
         <input
           type="number"
           id="customAmount"
@@ -41,19 +150,19 @@
           (input)="onCustomAmountChange()"
           min="1"
           step="1"
-          class="w-full pl-10 pr-4 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
-          placeholder="Enter amount"
-          aria-label="Custom donation amount in dollars">
+          class="w-full pl-10 pr-4 py-4 text-xl font-semibold border-2 border-primary-300 rounded-xl focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all"
+          placeholder="Entrez le montant"
+          aria-label="Montant de don personnalisé en dollars">
       </div>
     </div>
 
     <!-- Recurring Donation Toggle -->
-    <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl border-2 border-blue-200 mb-6">
+    <div class="flex items-center justify-between p-4 bg-primary-200 rounded-xl border-2 border-primary-300 mb-6">
       <div class="flex-1">
-        <label for="recurringToggle" class="font-semibold text-gray-900 cursor-pointer">
-          Make this a monthly donation
+        <label for="recurringToggle" class="font-semibold text-primary-900 cursor-pointer text-lg">
+          Faire de ceci un don mensuel
         </label>
-        <p class="text-sm text-gray-600 mt-1">Provide ongoing support to families in need</p>
+        <p class="text-lg text-primary-700 mt-1">Fournir un soutien continu aux familles dans le besoin</p>
       </div>
       <button
         type="button"
@@ -61,9 +170,9 @@
         role="switch"
         [attr.aria-checked]="isRecurring"
         (click)="toggleRecurring()"
-        [class.bg-blue-600]="isRecurring"
-        [class.bg-gray-300]="!isRecurring"
-        class="relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-500">
+        [class.bg-primary-700]="isRecurring"
+        [class.bg-primary-400]="!isRecurring"
+        class="relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-primary-500">
         <span
           [class.translate-x-7]="isRecurring"
           [class.translate-x-1]="!isRecurring"
@@ -74,17 +183,17 @@
 
     <!-- Impact Display -->
     <div *ngIf="selectedAmount > 0"
-         class="p-6 bg-gradient-to-r from-red-50 to-pink-50 rounded-xl border-2 border-red-200"
+         class="p-6 bg-gradient-to-r from-primary-200 to-primary-300 rounded-xl border-2 border-primary-400"
          role="status"
          aria-live="polite">
       <div class="flex items-start gap-3">
         <div class="text-3xl" aria-hidden="true">🛡️</div>
         <div class="flex-1">
-          <h3 class="font-bold text-gray-900 text-lg mb-2">Your Impact</h3>
-          <p class="text-gray-700">
-            Your {{isRecurring ? 'monthly' : ''}} donation of
-            <span class="font-bold text-red-600">${{selectedAmount}}</span>
-            will {{getDetailedImpact()}}
+          <h3 class="font-bold text-primary-900 text-xl mb-2">Votre impact</h3>
+          <p class="text-lg text-primary-900">
+            Votre don {{isRecurring ? 'mensuel ' : ''}}de
+            <span class="font-bold text-primary-800">${{selectedAmount}}</span>
+            va {{getDetailedImpact()}}
           </p>
         </div>
       </div>
@@ -92,85 +201,102 @@
   </div>
 
   <!-- Donor Information Form -->
-  <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Information</h2>
+  <div *ngIf="!showAuthOptions" class="bg-primary-50 rounded-2xl shadow-lg p-8 mb-6">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold text-primary-900">Vos informations</h2>
+      <span *ngIf="isLoggedIn" class="inline-flex items-center gap-2 bg-primary-300 text-primary-900 px-4 py-2 rounded-lg font-semibold">
+        <span>✓</span>
+        <span>Pré-remplies</span>
+      </span>
+      <span *ngIf="isGuestMode" class="inline-flex items-center gap-2 bg-primary-200 text-primary-800 px-4 py-2 rounded-lg font-medium">
+        <span>🎁</span>
+        <span>Mode invité</span>
+      </span>
+    </div>
+
+    <div *ngIf="isLoggedIn" class="mb-6 p-4 bg-primary-200 border-2 border-primary-400 rounded-lg">
+      <p class="text-lg text-primary-900 flex items-start gap-2">
+        <span class="text-xl">ℹ️</span>
+        <span>Vos informations sont automatiquement remplies. Vous pouvez les modifier si nécessaire.</span>
+      </p>
+    </div>
 
     <form [formGroup]="donorForm" (ngSubmit)="submitDonation()">
       <div class="grid md:grid-cols-2 gap-6 mb-6">
         <!-- First Name -->
         <div>
-          <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">
-            First Name <span class="text-red-500">*</span>
+          <label for="firstName" class="block text-lg font-semibold text-primary-800 mb-2">
+            Prénom <span class="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="firstName"
             formControlName="firstName"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+            class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all"
             [class.border-red-500]="donorForm.get('firstName')?.invalid && donorForm.get('firstName')?.touched"
             aria-required="true"
             aria-describedby="firstName-error">
           <p *ngIf="donorForm.get('firstName')?.invalid && donorForm.get('firstName')?.touched"
              id="firstName-error"
-             class="mt-1 text-sm text-red-600">
-            First name is required
+             class="mt-1 text-lg text-red-600">
+            Le prénom est requis
           </p>
         </div>
 
         <!-- Last Name -->
         <div>
-          <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">
-            Last Name <span class="text-red-500">*</span>
+          <label for="lastName" class="block text-lg font-semibold text-primary-800 mb-2">
+            Nom de famille <span class="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="lastName"
             formControlName="lastName"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+            class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all"
             [class.border-red-500]="donorForm.get('lastName')?.invalid && donorForm.get('lastName')?.touched"
             aria-required="true"
             aria-describedby="lastName-error">
           <p *ngIf="donorForm.get('lastName')?.invalid && donorForm.get('lastName')?.touched"
              id="lastName-error"
-             class="mt-1 text-sm text-red-600">
-            Last name is required
+             class="mt-1 text-lg text-red-600">
+            Le nom de famille est requis
           </p>
         </div>
       </div>
 
       <!-- Email -->
       <div class="mb-6">
-        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-          Email Address <span class="text-red-500">*</span>
+        <label for="email" class="block text-lg font-semibold text-primary-800 mb-2">
+          Adresse courriel <span class="text-red-500">*</span>
         </label>
         <input
           type="email"
           id="email"
           formControlName="email"
-          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+          class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all"
           [class.border-red-500]="donorForm.get('email')?.invalid && donorForm.get('email')?.touched"
           aria-required="true"
           aria-describedby="email-error">
         <p *ngIf="donorForm.get('email')?.invalid && donorForm.get('email')?.touched"
            id="email-error"
-           class="mt-1 text-sm text-red-600">
-          Please enter a valid email address
+           class="mt-1 text-lg text-red-600">
+          Veuillez entrer une adresse courriel valide
         </p>
       </div>
 
       <!-- Phone (Optional) -->
       <div class="mb-6">
-        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
-          Phone Number (Optional)
+        <label for="phone" class="block text-lg font-semibold text-primary-800 mb-2">
+          Numéro de téléphone (Optionnel)
         </label>
         <input
           type="tel"
           id="phone"
           formControlName="phone"
-          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+          class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all"
           aria-describedby="phone-help">
-        <p id="phone-help" class="mt-1 text-sm text-gray-600">
-          We'll only use this for donation receipts
+        <p id="phone-help" class="mt-1 text-lg text-primary-700">
+          Nous l'utiliserons uniquement pour les reçus de don
         </p>
       </div>
 
@@ -180,26 +306,26 @@
           type="checkbox"
           id="anonymous"
           formControlName="anonymous"
-          class="w-5 h-5 text-red-600 border-2 border-gray-300 rounded focus:ring-4 focus:ring-red-200 cursor-pointer">
-        <label for="anonymous" class="text-gray-700 font-medium cursor-pointer">
-          Make my donation anonymous
+          class="w-5 h-5 text-primary-700 border-2 border-primary-300 rounded focus:ring-4 focus:ring-primary-200 cursor-pointer">
+        <label for="anonymous" class="text-lg text-primary-800 font-medium cursor-pointer">
+          Rendre mon don anonyme
         </label>
       </div>
 
       <!-- Payment Information -->
-      <div class="border-t-2 border-gray-200 pt-6 mb-6">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Payment Information</h3>
-        <div class="p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg mb-6">
-          <p class="text-sm text-yellow-800 flex items-start gap-2">
+      <div class="border-t-2 border-primary-200 pt-6 mb-6">
+        <h3 class="text-xl font-bold text-primary-900 mb-4">Informations de paiement</h3>
+        <div class="p-4 bg-yellow-50 border-2 border-yellow-300 rounded-lg mb-6">
+          <p class="text-lg text-yellow-900 flex items-start gap-2">
             <span class="text-xl" aria-hidden="true">⚠️</span>
-            <span>Demo Version - No actual payment processing. In production, this would integrate with Stripe or another payment processor.</span>
+            <span>Version démo - Aucun paiement réel n'est traité. En production, cela s'intégrerait avec Stripe ou un autre processeur de paiement.</span>
           </p>
         </div>
 
         <!-- Card Number -->
         <div class="mb-4">
-          <label for="cardNumber" class="block text-sm font-semibold text-gray-700 mb-2">
-            Card Number <span class="text-red-500">*</span>
+          <label for="cardNumber" class="block text-lg font-semibold text-primary-800 mb-2">
+            Numéro de carte <span class="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -207,7 +333,7 @@
             formControlName="cardNumber"
             placeholder="1234 5678 9012 3456"
             maxlength="19"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all font-mono"
+            class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all font-mono"
             [class.border-red-500]="donorForm.get('cardNumber')?.invalid && donorForm.get('cardNumber')?.touched"
             aria-required="true">
         </div>
@@ -215,22 +341,22 @@
         <div class="grid md:grid-cols-2 gap-4">
           <!-- Expiry Date -->
           <div>
-            <label for="expiryDate" class="block text-sm font-semibold text-gray-700 mb-2">
-              Expiry Date <span class="text-red-500">*</span>
+            <label for="expiryDate" class="block text-lg font-semibold text-primary-800 mb-2">
+              Date d'expiration <span class="text-red-500">*</span>
             </label>
             <input
               type="text"
               id="expiryDate"
               formControlName="expiryDate"
-              placeholder="MM/YY"
+              placeholder="MM/AA"
               maxlength="5"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all font-mono"
+              class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all font-mono"
               aria-required="true">
           </div>
 
           <!-- CVV -->
           <div>
-            <label for="cvv" class="block text-sm font-semibold text-gray-700 mb-2">
+            <label for="cvv" class="block text-lg font-semibold text-primary-800 mb-2">
               CVV <span class="text-red-500">*</span>
             </label>
             <input
@@ -239,7 +365,7 @@
               formControlName="cvv"
               placeholder="123"
               maxlength="4"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all font-mono"
+              class="w-full px-4 py-3 text-lg border-2 border-primary-300 rounded-lg focus:border-primary-600 focus:ring-4 focus:ring-primary-200 outline-none transition-all font-mono"
               aria-required="true">
           </div>
         </div>
@@ -251,21 +377,21 @@
         [disabled]="!donorForm.valid || selectedAmount === 0 || isProcessing"
         [class.opacity-50]="!donorForm.valid || selectedAmount === 0 || isProcessing"
         [class.cursor-not-allowed]="!donorForm.valid || selectedAmount === 0 || isProcessing"
-        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-500 disabled:hover:bg-red-600 text-lg">
+        class="w-full bg-primary-700 hover:bg-primary-800 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-500 disabled:hover:bg-primary-700 text-lg">
         <span *ngIf="!isProcessing">
-          🛡️ Complete Donation of ${{selectedAmount}}{{isRecurring ? '/month' : ''}}
+          🛡️ Compléter le don de ${{selectedAmount}}{{isRecurring ? '/mois' : ''}}
         </span>
         <span *ngIf="isProcessing" class="flex items-center justify-center gap-2">
           <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          Processing...
+          Traitement en cours...
         </span>
       </button>
 
-      <p class="text-center text-sm text-gray-600 mt-4">
-        🔒 Your payment information is secure and encrypted
+      <p class="text-center text-lg text-primary-700 mt-4">
+        🔒 Vos informations de paiement sont sécurisées et cryptées
       </p>
     </form>
   </div>

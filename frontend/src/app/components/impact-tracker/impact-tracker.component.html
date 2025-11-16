@@ -2,10 +2,10 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <!-- Section Title -->
                   <div class="text-center mb-16">
-                    <h2 id="impact-tracker-heading" class="text-4xl font-bold text-gray-900 mb-4">
+                    <h2 id="impact-tracker-heading" class="text-4xl font-bold text-primary-900 mb-4">
                       Why choose Shield of Athena
                     </h2>
-                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    <p class="text-lg text-primary-700 max-w-3xl mx-auto">
                       Our commitment to families escaping violence is reflected in our comprehensive support and proven impact.
                     </p>
                   </div>
@@ -14,7 +14,7 @@
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div
                       *ngFor="let stat of animatedStats; let i = index"
-                      class="impact-card bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                      class="impact-card bg-primary-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
                       role="article"
                       [attr.aria-label]="stat.label + ': ' + formatNumber(stat.value)"
                     >
@@ -40,7 +40,7 @@
                       </div>
 
                       <!-- Stat Title -->
-                      <h3 class="text-xl font-bold text-gray-900 text-center mb-4">
+                      <h3 class="text-xl font-bold text-primary-900 text-center mb-4">
                         {{ stat.label }}
                       </h3>
 
@@ -55,7 +55,7 @@
                       </div>
 
                       <!-- Description -->
-                      <p class="text-gray-600 text-center text-sm leading-relaxed">
+                      <p class="text-primary-700 text-center text-lg leading-relaxed">
                         {{ getDescription(i) }}
                       </p>
                     </div>

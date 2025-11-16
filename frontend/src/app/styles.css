@@ -296,21 +296,3 @@
     display: none !important;
   }
 }
-
-/* ============================================
-   DARK MODE SUPPORT (OPTIONAL)
-   ============================================ */
-
-@media (prefers-color-scheme: dark) {
-  /* Si vous voulez supporter le mode sombre */
-  /* Décommenter et ajuster selon les besoins */
-  /*
-  html {
-    @apply bg-primary-900;
-  }
-  
-  body {
-    @apply bg-primary-900 text-primary-50;
-  }
-  */
-}

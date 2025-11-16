@@ -1,6 +1,6 @@
 .hero-container {
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: #F5F3FF;
   padding: 0;
   margin: 0;
 }
@@ -138,7 +138,7 @@
 
 .stat-number {
   font-size: 2.5rem;
-  color: #667eea;
+  color: #C5C6E8;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -365,7 +365,7 @@
 /* Hero Section - Blue gradient background */
 .hero-section {
   background: radial-gradient(1200px 500px at 20% 40%, rgba(255,255,255,0.03), transparent),
-              linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%);
+              linear-gradient(180deg, #C5C6E8 0%, #2E294E 100%);
   color: white;
   padding: 80px 0;
   overflow: hidden;
@@ -416,8 +416,7 @@
 
 /* CTA button - yellow pill */
 .cta-btn {
-  background: #fbbf24;
-  color: #1e3a8a;
+  background: #8B87C7;
   padding: 16px 32px;
   border-radius: 12px;
   border: none;
@@ -430,8 +429,8 @@
 
 .cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(8,20,50,0.35);
-  background: #f59e0b;
+  box-shadow: 0 14px 32px #8B87C7;
+  background: #3D3B5E;
 }
 
 /* Ratings + avatars */
@@ -489,7 +488,7 @@
   width: 100%;
   max-width: 420px;
   border-radius: 22px;
-  background: #fbbf24;
+  background: #8B87C7;
   padding: 18px;
   box-shadow: 0 18px 40px rgba(2,10,35,0.35);
   display: flex;

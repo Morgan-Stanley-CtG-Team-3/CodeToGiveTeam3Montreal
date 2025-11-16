@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
 interface CreateTransactionRequest {
@@ -34,6 +35,7 @@ interface TransactionResponse {
 })
 export class DonationFormComponent implements OnInit {
   private http = inject(HttpClient);
+  private router = inject(Router);
   private apiBase = environment.apiBase;
 
   presetAmounts = [25, 50, 100, 250];
@@ -42,6 +44,15 @@ export class DonationFormComponent implements OnInit {
   isRecurring = false;
   isProcessing = false;
   donorForm: FormGroup;
+  
+  // Authentication state
+  isLoggedIn = false;
+  userEmail = '';
+  userName = '';
+  
+  // Guest mode
+  isGuestMode = false;
+  showAuthOptions = true;
 
   constructor(private fb: FormBuilder) {
     this.donorForm = this.fb.group({
@@ -58,6 +69,57 @@ export class DonationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectAmount(100);
+    this.checkAuthStatus();
+  }
+
+  checkAuthStatus(): void {
+    // Check if user is logged in (using localStorage like navbar)
+    const token = localStorage.getItem('authToken');
+    const userEmail = localStorage.getItem('userEmail');
+    const userName = localStorage.getItem('userName');
+    
+    if (token && userEmail) {
+      this.isLoggedIn = true;
+      this.userEmail = userEmail;
+      this.userName = userName || '';
+      this.showAuthOptions = false;
+      this.prefillUserInfo();
+    }
+  }
+
+  prefillUserInfo(): void {
+    // Pre-fill form with user information
+    if (this.userName) {
+      const nameParts = this.userName.split(' ');
+      this.donorForm.patchValue({
+        firstName: nameParts[0] || '',
+        lastName: nameParts.slice(1).join(' ') || '',
+        email: this.userEmail,
+      });
+    } else {
+      this.donorForm.patchValue({
+        email: this.userEmail,
+      });
+    }
+  }
+
+  continueAsGuest(): void {
+    this.isGuestMode = true;
+    this.showAuthOptions = false;
+  }
+
+  goToLogin(): void {
+    // Store current donation amount in session storage
+    sessionStorage.setItem('pendingDonationAmount', this.selectedAmount.toString());
+    sessionStorage.setItem('pendingDonationRecurring', this.isRecurring.toString());
+    this.router.navigate(['/login'], { queryParams: { returnUrl: '/donate' } });
+  }
+
+  goToSignup(): void {
+    // Store current donation amount in session storage
+    sessionStorage.setItem('pendingDonationAmount', this.selectedAmount.toString());
+    sessionStorage.setItem('pendingDonationRecurring', this.isRecurring.toString());
+    this.router.navigate(['/signup'], { queryParams: { returnUrl: '/donate' } });
   }
 
   selectAmount(amount: number): void {
@@ -118,12 +180,15 @@ export class DonationFormComponent implements OnInit {
 
     this.isProcessing = true;
 
-    // Créer la requête de transaction avec les valeurs hardcodées
+    const formValue = this.donorForm.value;
+    const donorName = `${formValue.firstName} ${formValue.lastName}`;
+    
+    // Create transaction request with actual form data
     const transactionRequest: CreateTransactionRequest = {
-      donorName: 'george',
-      email: 'george@test.com',
+      donorName: formValue.anonymous ? 'Anonymous' : donorName,
+      email: formValue.email,
       amount: this.selectedAmount,
-      anonymous: this.donorForm.value.anonymous || false,
+      anonymous: formValue.anonymous || false,
     };
 
     const headers = new HttpHeaders({
@@ -131,7 +196,7 @@ export class DonationFormComponent implements OnInit {
       'X-API-Key': environment.apiKey,
     });
 
-    // Appel API pour créer la transaction
+    // API call to create transaction
     this.http
       .post<TransactionResponse>(
         `${this.apiBase}/transactions`,
@@ -142,18 +207,22 @@ export class DonationFormComponent implements OnInit {
         next: (response) => {
           console.log('Transaction created:', response);
           this.isProcessing = false;
-          alert(
-            `Thank you for your ${
-              this.isRecurring ? 'monthly ' : ''
-            }donation of $${this.selectedAmount}! Transaction ID: ${
-              response.id
-            }`
-          );
+          
+          const message = `Thank you ${formValue.anonymous ? '' : formValue.firstName} for your ${
+            this.isRecurring ? 'monthly ' : ''
+          }donation of $${this.selectedAmount}!\n\nTransaction ID: ${response.id}\n\nYou will receive a confirmation email at ${formValue.email}`;
+          
+          alert(message);
 
           // Reset form
           this.donorForm.reset();
           this.selectedAmount = 100;
           this.isRecurring = false;
+          
+          // If user was logged in, keep their info filled
+          if (this.isLoggedIn) {
+            this.prefillUserInfo();
+          }
         },
         error: (err) => {
           console.error('Error creating transaction:', err);

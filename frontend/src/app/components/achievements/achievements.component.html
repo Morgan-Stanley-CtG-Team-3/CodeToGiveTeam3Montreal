@@ -2,10 +2,10 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl sm:text-4xl font-bold text-primary-900 mb-4">
         Your Achievements
       </h2>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      <p class="text-lg text-primary-700 max-w-2xl mx-auto">
         Every action you take helps create safer communities. Track your impact
         and unlock achievements.
       </p>
@@ -16,14 +16,14 @@
       <div
         class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"
       ></div>
-      <p class="mt-4 text-gray-600">Loading achievements...</p>
+      <p class="mt-4 text-primary-700">Loading achievements...</p>
     </div>
 
     <!-- Error State -->
     <div *ngIf="error" class="text-center py-12">
       <div class="text-6xl mb-4">⚠️</div>
       <h3 class="text-xl font-semibold text-red-600 mb-2">Error</h3>
-      <p class="text-gray-600 mb-6">{{ error }}</p>
+      <p class="text-primary-700 mb-6">{{ error }}</p>
       <button
         (click)="loadBadges()"
         class="inline-flex items-center px-6 py-3 bg-red-600 text-white font-semibold rounded-full hover:bg-red-700 transition-colors"
@@ -37,39 +37,39 @@
       <!-- User Stats Summary -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
         <div
-          class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center"
+          class="bg-primary-50 rounded-lg p-6 shadow-sm border border-primary-200 text-center"
         >
           <div class="text-3xl font-bold text-red-600 mb-2">
             {{ userProfile.totalDonated | currency }}
           </div>
-          <div class="text-sm text-gray-600 font-medium">Total Donated</div>
+          <div class="text-lg text-primary-700 font-medium">Total Donated</div>
         </div>
 
         <div
-          class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center"
+          class="bg-primary-50 rounded-lg p-6 shadow-sm border border-primary-200 text-center"
         >
           <div class="text-3xl font-bold text-blue-600 mb-2">
             {{ userProfile.familiesHelped }}
           </div>
-          <div class="text-sm text-gray-600 font-medium">Families Helped</div>
+          <div class="text-lg text-primary-700 font-medium">Families Helped</div>
         </div>
 
         <div
-          class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center"
+          class="bg-primary-50 rounded-lg p-6 shadow-sm border border-primary-200 text-center"
         >
-          <div class="text-3xl font-bold text-green-600 mb-2">
+          <div class="text-3xl font-bold text-primary-700 mb-2">
             {{ userProfile.donationCount }}
           </div>
-          <div class="text-sm text-gray-600 font-medium">Donations Made</div>
+          <div class="text-lg text-primary-700 font-medium">Donations Made</div>
         </div>
 
         <div
-          class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 text-center"
+          class="bg-primary-50 rounded-lg p-6 shadow-sm border border-primary-200 text-center"
         >
           <div class="text-3xl font-bold text-purple-600 mb-2">
             {{ userBadges.length }}
           </div>
-          <div class="text-sm text-gray-600 font-medium">Achievements</div>
+          <div class="text-lg text-primary-700 font-medium">Achievements</div>
         </div>
       </div>
 
@@ -80,7 +80,7 @@
         <div
           *ngFor="let badge of allBadges"
           [id]="'achievement-' + badge.id"
-          class="achievement-card bg-white rounded-xl p-6 shadow-sm border-2 transition-all duration-300 hover:shadow-md"
+          class="achievement-card bg-primary-50 rounded-xl p-6 shadow-sm border-2 transition-all duration-300 hover:shadow-md"
           [class.locked]="!isUnlocked(badge.id)"
           [class.unlocked]="isUnlocked(badge.id)"
           [attr.aria-label]="badge.name + ': ' + badge.description"
@@ -101,7 +101,7 @@
           <!-- Achievement Title -->
           <h3
             class="text-lg font-bold text-center mb-2"
-            [class.text-gray-900]="isUnlocked(badge.id)"
+            [class.text-primary-900]="isUnlocked(badge.id)"
             [class.text-gray-500]="!isUnlocked(badge.id)"
           >
             {{ badge.name }}
@@ -109,8 +109,8 @@
 
           <!-- Achievement Description -->
           <p
-            class="text-sm text-center mb-4"
-            [class.text-gray-600]="isUnlocked(badge.id)"
+            class="text-lg text-center mb-4"
+            [class.text-primary-700]="isUnlocked(badge.id)"
             [class.text-gray-400]="!isUnlocked(badge.id)"
           >
             {{ badge.description }}
@@ -156,7 +156,7 @@
             </span>
             <span
               *ngIf="!isUnlocked(badge.id)"
-              class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600"
+              class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-700"
             >
               <svg
                 class="w-4 h-4 mr-1"
@@ -179,10 +179,10 @@
       <!-- Empty State (no badges in system) -->
       <div *ngIf="allBadges.length === 0" class="text-center py-12">
         <div class="text-6xl mb-4">🎯</div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+        <h3 class="text-xl font-semibold text-primary-900 mb-2">
           No Achievements Available
         </h3>
-        <p class="text-gray-600 mb-6">
+        <p class="text-primary-700 mb-6">
           Check back later for new achievements to unlock!
         </p>
       </div>
@@ -190,13 +190,13 @@
       <!-- Call to Action (when user has no badges) -->
       <div
         *ngIf="allBadges.length > 0 && userBadges.length === 0"
-        class="text-center py-12 mt-8 bg-white rounded-xl shadow-sm border border-gray-200"
+        class="text-center py-12 mt-8 bg-primary-50 rounded-xl shadow-sm border border-primary-200"
       >
         <div class="text-6xl mb-4">🚀</div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">
+        <h3 class="text-xl font-semibold text-primary-900 mb-2">
           Start Your Journey
         </h3>
-        <p class="text-gray-600 mb-6">
+        <p class="text-primary-700 mb-6">
           Make your first donation to unlock achievements and track your impact!
         </p>
         <button
