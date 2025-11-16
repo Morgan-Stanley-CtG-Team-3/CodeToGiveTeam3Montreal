@@ -80,6 +80,7 @@ export class AchievementsComponent implements OnInit {
   }
 
   private loadAllData(): void {
+    console.log('Loading all user data and badges...');
     this.loading = true;
     this.error = null;
 
@@ -106,10 +107,10 @@ export class AchievementsComponent implements OnInit {
         // Mettre à jour les badges
         this.allBadges = result.allBadges;
         console.log('All badges loaded:', this.allBadges);
-        
+
         this.userBadges = result.userBadges;
         console.log('User badges from API:', this.userBadges);
-        
+
         this.userBadgeIds = new Set(result.userBadges.map((b) => b.id));
         console.log('User badge IDs:', Array.from(this.userBadgeIds));
 
@@ -167,7 +168,8 @@ export class AchievementsComponent implements OnInit {
     console.log('Sending badge IDs to assign:', badgeIds);
 
     const headers = new HttpHeaders({
-      'X-API-KEY': environment.apiKey
+      'Content-Type': 'application/json',
+      'X-API-KEY': environment.apiKey,
     });
 
     this.http
@@ -179,7 +181,10 @@ export class AchievementsComponent implements OnInit {
       .subscribe({
         next: (updatedBadges) => {
           console.log('Badges assigned successfully:', updatedBadges);
-          console.log('Updated badge IDs:', updatedBadges.map((b) => b.id));
+          console.log(
+            'Updated badge IDs:',
+            updatedBadges.map((b) => b.id)
+          );
 
           // Mettre à jour les badges de l'utilisateur
           this.userBadges = updatedBadges;
@@ -305,7 +310,9 @@ export class AchievementsComponent implements OnInit {
       const remaining =
         cumulativeConfig.threshold - this.userProfile.totalDonated;
       if (remaining > 0) {
-        return `$${this.userProfile.totalDonated.toFixed(2)} / $${cumulativeConfig.threshold}`;
+        return `$${this.userProfile.totalDonated.toFixed(2)} / $${
+          cumulativeConfig.threshold
+        }`;
       }
     }
 
