@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class NavbarComponent {
   isMenuOpen = false;
+  isLoggedIn = false; // État de connexion
   isLoginModalOpen = false;
   isSignupModalOpen = false;
 
@@ -58,9 +59,9 @@ export class NavbarComponent {
   }
 
   handleLogin(): void {
-    // Logique de connexion ici (pour l'instant juste un console.log)
     console.log('Login attempt:', { email: this.loginEmail, password: this.loginPassword });
-    // Fermer le modal après la connexion
+    // Simuler la connexion réussie
+    this.isLoggedIn = true;
     this.closeLoginModal();
   }
 
@@ -83,13 +84,13 @@ export class NavbarComponent {
   }
 
   handleSignup(): void {
-    // Logique de création de compte ici (pour l'instant juste un console.log)
     console.log('Signup attempt:', { 
       name: this.signupName, 
       email: this.signupEmail, 
       password: this.signupPassword 
     });
-    // Fermer le modal après l'inscription
+    // Simuler l'inscription réussie
+    this.isLoggedIn = true;
     this.closeSignupModal();
   }
 
