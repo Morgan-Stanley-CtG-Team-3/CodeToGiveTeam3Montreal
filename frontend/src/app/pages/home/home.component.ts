@@ -7,6 +7,7 @@ import {QuizComponent} from '../../components/quiz/quiz.component';
 import {JourneyTimelineComponent} from '../../components/journey-timeline/journey-timeline.component';
 import {LeaderboardComponent} from '../../components/leaderboard/leaderboard.component';
 import {PageComponent} from '../../components/page/page.component';
+import {DonationeventComponent} from '../../components/donationevent/donationevent.component';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ import {PageComponent} from '../../components/page/page.component';
     AchievementsComponent,
     QuizComponent,
     JourneyTimelineComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    DonationeventComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
