@@ -45,7 +45,7 @@ public class DonationEventController {
     }
 
     @PostMapping("/{id}/donate")
-    public ResponseEntity<TransactionResponseDTO> donate(@PathVariable Long id, DonationRequestDTO req) {
+    public ResponseEntity<TransactionResponseDTO> donate(@PathVariable Long id, @RequestBody DonationRequestDTO req) {
         return ResponseEntity.ok(TransactionMapper.toDTO(service.donate(id, req.email(), req.amount())));
     }
 }
