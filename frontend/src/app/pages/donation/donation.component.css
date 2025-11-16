@@ -1,0 +1,23 @@
+.section-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .section-content {
+    width: 85%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-content {
+    width: 95%;
+  }
+}

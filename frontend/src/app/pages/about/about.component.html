@@ -1,118 +1,260 @@
-<app-page backgroundColor="#ffffff">
-  <div class="about-container">
-    <!-- Header Section -->
-    <section class="about-header">
-      <h1 class="page-title">About DonorConnect</h1>
-      <p class="page-subtitle">Connecting generous hearts with meaningful causes</p>
-    </section>
+<app-page [fullWidth]="true">
+        <div class="bg-white">
+          <!-- Hero Section -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+            <div class="text-center mb-16">
+              <p class="text-indigo-600 font-semibold text-sm uppercase tracking-wide mb-4">About Us</p>
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                Empowering Women and Families to Break the Cycle of Violence
+              </h1>
+              <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                The Shield of Athena provides emergency shelter, professional support, and culturally adapted services
+                to women and children affected by family violence across Montreal and Laval.
+              </p>
+            </div>
+          </section>
 
-    <!-- Mission Section -->
-    <section class="mission-section">
-      <div class="content-card">
-        <div class="card-icon">🎯</div>
-        <h2>Our Mission</h2>
-        <p>
-          At DonorConnect, we believe that every act of giving has the power to transform lives.
-          Our mission is to create a transparent, engaging, and meaningful platform that connects
-          donors with causes that matter most to them. We're committed to making philanthropy
-          accessible, rewarding, and impactful for everyone.
-        </p>
-      </div>
-    </section>
+          <!-- Mission Section with Images -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <!-- Left Content -->
+              <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
+                <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
+                  <p>
+                    The Shield is a charitable organization offering education, professional support, intervention
+                    and prevention services that are culturally and linguistically adapted to meet the needs of women,
+                    their children and ethnocultural communities.
+                  </p>
+                  <p>
+                    We provide multilingual services in 16 languages, ensuring that every woman can access help in
+                    her language of origin. Our approach is rooted in respect, empowerment, and cultural sensitivity.
+                  </p>
+                  <p>
+                    Through our offices in Montreal and Laval, our emergency shelter Athena's House, and our community
+                    outreach program, we offer comprehensive support to break the cycle of violence.
+                  </p>
+                </div>
+              </div>
 
-    <!-- Values Section -->
-    <section class="values-section">
-      <h2 class="section-title">Our Core Values</h2>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon">💎</div>
-          <h3>Transparency</h3>
-          <p>Every donation is tracked and accounted for. You'll always know exactly where your money goes and the impact it creates.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🤝</div>
-          <h3>Trust</h3>
-          <p>We partner with verified organizations and maintain the highest standards of accountability and ethical practices.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🌟</div>
-          <h3>Impact</h3>
-          <p>We focus on creating measurable, lasting change in the communities we serve around the world.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">❤️</div>
-          <h3>Compassion</h3>
-          <p>At our core, we're driven by empathy and a deep commitment to helping those in need.</p>
-        </div>
-      </div>
-    </section>
+              <!-- Right Images Grid -->
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-4">
+                  <div class="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl h-64 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                  </div>
+                  <div class="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl h-80 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-1.591 5.828a4 4 0 01-5.818 0l-3.536 3.536a1 1 0 001.414 1.414L4 15.414V17a1 1 0 102 0v-1.586l.293.293a1 1 0 001.414-1.414l-3.536-3.536zM17 6a3 3 0 11-6 0 3 3 0 016 0zm-1.591 5.828a4 4 0 01-5.818 0l-3.536 3.536a1 1 0 001.414 1.414L12 15.414V17a1 1 0 102 0v-1.586l.293.293a1 1 0 001.414-1.414l-3.536-3.536z"></path></svg>
+                  </div>
+                </div>
+                <div class="space-y-4 pt-8">
+                  <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl h-80 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                  </div>
+                  <div class="bg-gradient-to-br from-pink-100 to-red-100 rounded-2xl h-64 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-pink-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.72 7.97 5 10 5c2.03 0 3.488.72 4.756 1.321l.127.063a.5.5 0 00.496-.868l-.127-.063C13.632 4.2 11.97 3.5 10 3.5c-2.43 0-4.228.826-5.943 2.064a6.012 6.012 0 00-1.912 2.706.5.5 0 00.868.496z" clip-rule="evenodd"></path></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-    <!-- Story Section -->
-    <section class="story-section">
-      <div class="story-content">
-        <div class="story-text">
-          <h2>Our Story</h2>
-          <p>
-            Founded in 2023, DonorConnect was born from a simple idea: what if giving could be
-            more engaging, transparent, and rewarding? Our founders experienced firsthand the
-            disconnect between donors and the causes they support.
-          </p>
-          <p>
-            Today, we've grown into a thriving community of over 10,000 donors who have
-            collectively contributed more than $500,000 to causes worldwide. But we're just
-            getting started.
-          </p>
-          <p>
-            Every day, we work to build features that make giving more meaningful – from
-            real-time impact tracking to gamification elements that celebrate your generosity.
-          </p>
-        </div>
-        <div class="story-image">
-          <div class="image-placeholder">
-            <span class="placeholder-icon">🌍</span>
-            <p>Making a global impact</p>
-          </div>
-        </div>
-      </div>
-    </section>
+          <!-- Impact Numbers -->
+          <section class="bg-gray-50 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <p class="text-gray-600 font-semibold text-sm uppercase tracking-wide mb-8">Our Impact</p>
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                  <div class="text-5xl font-bold text-gray-900 mb-2">16</div>
+                  <div class="text-gray-600">Languages Supported</div>
+                </div>
+                <div>
+                  <div class="text-5xl font-bold text-gray-900 mb-2">24/7</div>
+                  <div class="text-gray-600">Emergency Shelter</div>
+                </div>
+                <div>
+                  <div class="text-5xl font-bold text-gray-900 mb-2">30+</div>
+                  <div class="text-gray-600">Years of Service</div>
+                </div>
+                <div>
+                  <div class="text-5xl font-bold text-gray-900 mb-2">1991</div>
+                  <div class="text-gray-600">Year Founded</div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-    <!-- Team Section -->
-    <section class="team-section">
-      <h2 class="section-title">Our Team</h2>
-      <p class="team-intro">Meet the passionate people working to make giving more impactful</p>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar">👨‍💼</div>
-          <h3>John Smith</h3>
-          <p class="team-role">Founder & CEO</p>
-          <p class="team-bio">Passionate about technology for social good</p>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">👩‍💻</div>
-          <h3>Sarah Johnson</h3>
-          <p class="team-role">CTO</p>
-          <p class="team-bio">Building transparent donation systems</p>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">👨‍🎨</div>
-          <h3>Michael Chen</h3>
-          <p class="team-role">Head of Impact</p>
-          <p class="team-bio">Ensuring every dollar makes a difference</p>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar">👩‍💼</div>
-          <h3>Emily Davis</h3>
-          <p class="team-role">Community Manager</p>
-          <p class="team-bio">Connecting donors with causes they love</p>
-        </div>
-      </div>
-    </section>
+          <!-- Our Services -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Three Integrated Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                  <svg class="w-7 h-7 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Professional Offices</h3>
+                <p class="text-gray-600">
+                  Multilingual services by professional social workers, trained cultural intermediaries,
+                  and supervised law students in Montreal and Laval.
+                </p>
+              </div>
+              <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                  <svg class="w-7 h-7 text-purple-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Athena's House</h3>
+                <p class="text-gray-600">
+                  Emergency shelter providing 24/7 housing to women and their children in a safe
+                  and empowering environment.
+                </p>
+              </div>
+              <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-6">
+                  <svg class="w-7 h-7 text-pink-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-1.707 1.707A1 1 0 003 15v1a1 1 0 001 1h12a1 1 0 001-1v-1a1 1 0 00-.293-.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Community Outreach</h3>
+                <p class="text-gray-600">
+                  Information and support provided to men and women across Montreal and Laval
+                  in their own languages.
+                </p>
+              </div>
+            </div>
+          </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <h2>Join Our Mission</h2>
-      <p>Be part of a community that's making real change happen</p>
-      <button class="btn-cta" routerLink="/">Start Making Impact</button>
-    </section>
-  </div>
-</app-page>
+          <!-- Core Values -->
+          <section class="bg-gradient-to-br from-indigo-50 to-purple-50 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Our Core Values</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                      <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-1.591 5.828a4 4 0 01-5.818 0l-3.536 3.536a1 1 0 001.414 1.414L4 15.414V17a1 1 0 102 0v-1.586l.293.293a1 1 0 001.414-1.414l-3.536-3.536zM17 6a3 3 0 11-6 0 3 3 0 016 0zm-1.591 5.828a4 4 0 01-5.818 0l-3.536 3.536a1 1 0 001.414 1.414L12 15.414V17a1 1 0 102 0v-1.586l.293.293a1 1 0 001.414-1.414l-3.536-3.536z"></path></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Welcoming Environment</h4>
+                      <p class="text-gray-600 text-sm">A warm, supportive space for all who need us</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                      <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Empowerment</h4>
+                      <p class="text-gray-600 text-sm">Providing respect and support in times of need</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                      <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Security & Confidentiality</h4>
+                      <p class="text-gray-600 text-sm">Ensuring safety and privacy for all clients</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                      <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Equal Access</h4>
+                      <p class="text-gray-600 text-sm">Social justice and equal service for all</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                      <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Integrity</h4>
+                      <p class="text-gray-600 text-sm">Professional and ethical interventions</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-xl p-6">
+                  <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                      <svg class="w-8 h-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.72 7.97 5 10 5c2.03 0 3.488.72 4.756 1.321l.127.063a.5.5 0 00.496-.868l-.127-.063C13.632 4.2 11.97 3.5 10 3.5c-2.43 0-4.228.826-5.943 2.064a6.012 6.012 0 00-1.912 2.706.5.5 0 00.868.496z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-2">Cultural Sensitivity</h4>
+                      <p class="text-gray-600 text-sm">Violence is unacceptable regardless of background</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- History Timeline -->
+          <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Our Journey</h2>
+            <div class="space-y-8">
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-24 text-right">
+                  <span class="inline-block bg-indigo-100 text-indigo-700 font-bold px-4 py-2 rounded-lg">1991</span>
+                </div>
+                <div class="flex-grow pb-8 border-l-2 border-gray-200 pl-6">
+                  <h3 class="font-bold text-gray-900 mb-2">Founded</h3>
+                  <p class="text-gray-600">Shield of Athena established to provide Greek community with family violence information and support in their language.</p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-24 text-right">
+                  <span class="inline-block bg-purple-100 text-purple-700 font-bold px-4 py-2 rounded-lg">1997</span>
+                </div>
+                <div class="flex-grow pb-8 border-l-2 border-gray-200 pl-6">
+                  <h3 class="font-bold text-gray-900 mb-2">Media Outreach</h3>
+                  <p class="text-gray-600">Launched Ethnic Media Community Outreach Program in partnership with federal government.</p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-24 text-right">
+                  <span class="inline-block bg-pink-100 text-pink-700 font-bold px-4 py-2 rounded-lg">2002</span>
+                </div>
+                <div class="flex-grow pb-8 border-l-2 border-gray-200 pl-6">
+                  <h3 class="font-bold text-gray-900 mb-2">Award-Winning PSA</h3>
+                  <p class="text-gray-600">"Violence Hurts Us All" broadcast in 14 languages across Canada.</p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-24 text-right">
+                  <span class="inline-block bg-blue-100 text-blue-700 font-bold px-4 py-2 rounded-lg">Today</span>
+                </div>
+                <div class="flex-grow pl-6">
+                  <h3 class="font-bold text-gray-900 mb-2">Expanded Services</h3>
+                  <p class="text-gray-600">Operating offices, emergency shelter, and community programs serving diverse communities across Montreal and Laval.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CTA Section -->
+          <section class="bg-gradient-to-br from-indigo-600 to-purple-700 text-white py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 class="text-3xl md:text-4xl font-bold mb-6">Support Our Mission</h2>
+              <p class="text-xl mb-8 text-indigo-100">
+                Help us continue providing vital services to women and families affected by violence
+              </p>
+              <button
+                routerLink="/donate"
+                class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2">
+                Make a Donation
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </button>
+            </div>
+          </section>
+        </div>
+      </app-page>

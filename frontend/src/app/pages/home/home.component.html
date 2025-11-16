@@ -7,11 +7,21 @@
       <div class="hero-overlay">
         <div class="hero-content">
           <div class="text-section">
-            <h1>Bienvenue sur notre plateforme</h1>
-            <p>
-              Découvrez une expérience unique et innovante. Nous vous offrons les
-              meilleurs services pour répondre à tous vos besoins.
-            </p>
+            <h1 class="text-4xl font-bold text-blue-900 mb-6">Shield of Athena</h1>
+            <div class="prose prose-lg text-gray-700 space-y-4">
+              <p>
+                For over three decades, Shield of Athena has been a beacon of hope for
+                families escaping violence. We provide emergency shelter, counseling
+                services, and prevention programs that break the cycle of abuse.
+              </p>
+
+              <p>
+                Our comprehensive approach addresses immediate safety needs while
+                building long-term resilience through therapy, education, and community
+                support. Every donation directly funds life-saving services and prevention
+                programs.
+              </p>
+            </div>
           </div>
 
           <div class="image-section">
@@ -31,24 +41,12 @@
     <!-- Impact Counter Section -->
     <section class="section-wrapper bg-gray">
       <div class="section-content">
-        <h2>{{ config?.impact_counter_title }}</h2>
         <app-impact-tracker></app-impact-tracker>
       </div>
     </section>
 
-    <!-- Quiz Section -->
-    <section class="section-wrapper bg-white">
-      <div class="section-content">
-        <app-quiz></app-quiz>
-      </div>
-    </section>
 
-    <!-- Donation Section -->
-    <section class="section-wrapper bg-white">
-      <div class="section-content">
-        <app-donation-form></app-donation-form>
-      </div>
-    </section>
+
 
     <!-- journey-timeline Section -->
     <section class="section-wrapper bg-gray">
@@ -78,12 +76,6 @@
       </div>
     </section>
 
-    <!-- ai-chat  Section -->
-    <section class="section-wrapper bg-gray">
-      <div class="section-content">
-        <app-ai-chat *ngIf="showChat"></app-ai-chat>
-      </div>
-    </section>
   </div>
 
 

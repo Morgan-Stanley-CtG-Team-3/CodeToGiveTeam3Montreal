@@ -77,7 +77,7 @@
   }
 
   .text-section {
-    padding: 40px 30px;
+    padding: 40px 80px;
     text-align: center;
   }
 
@@ -328,24 +328,17 @@
   width: 100%;
 }
 
-.section-wrapper {
-  width: 100%;
-  padding: 60px 0;
-  display: flex;
-  justify-content: center;
+/* Responsive spacing adjustments */
+@media (max-width: 640px) {
+  .prose {
+    font-size: 1rem;
+  }
 }
 
-.section-wrapper.bg-white {
-  background-color: #ffffff;
-}
 
-.section-wrapper.bg-gray {
-  background-color: #f7f7f7;
-}
 
 .section-content {
-  width: 70%;
-  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
 }
 
