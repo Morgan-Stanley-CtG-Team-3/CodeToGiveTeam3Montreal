@@ -33,7 +33,9 @@ services:
     container_name: shield-of-athena-db
     restart: unless-stopped
     ports:
-      - "3306:3306"
+      # WARNING: Exposing MySQL port 3306 to all interfaces is insecure for production.
+      # For local development, restrict access to localhost only:
+      - "127.0.0.1:3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: shieldofathena
