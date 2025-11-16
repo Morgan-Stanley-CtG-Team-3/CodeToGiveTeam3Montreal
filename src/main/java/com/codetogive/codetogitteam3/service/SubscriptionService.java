@@ -85,19 +85,19 @@ public class SubscriptionService {
         double total = s.getCumulativeTotal();
         String email = s.getUser().getEmail();
         // Load badge descriptions into a Set once
-        java.util.Set<String> badgeDescriptions = new java.util.HashSet<>();
-        s.getUser().getBadges().forEach(b -> badgeDescriptions.add(b.getDescription()));
+        java.util.Set<String> badgeNames = new java.util.HashSet<>();
+        s.getUser().getBadges().forEach(b -> badgeNames.add(b.getName()));
 
-        if (total >= 100 && total < 250 && !badgeDescriptions.contains("Supporter 100$")) {
+        if (total >= 100 && total < 250 && !badgeNames.contains("Supporter 100$")) {
             badgeService.assignToUserByEmail("Supporter 100$", email);
         }
-        if (total >= 250 && total < 500 && !badgeDescriptions.contains("Supporter 250$")) {
+        if (total >= 250 && total < 500 && !badgeNames.contains("Supporter 250$")) {
             badgeService.assignToUserByEmail("Supporter 250$", email);
         }
-        if (total >= 500 && total < 1000 && !badgeDescriptions.contains("Supporter 500$")) {
+        if (total >= 500 && total < 1000 && !badgeNames.contains("Supporter 500$")) {
             badgeService.assignToUserByEmail("Supporter 500$", email);
         }
-        if (total >= 1000 && !badgeDescriptions.contains("Pilier 1000$")) {
+        if (total >= 1000 && !badgeNames.contains("Pilier 1000$")) {
             badgeService.assignToUserByEmail("Pilier 1000$", email);
         }
     }
