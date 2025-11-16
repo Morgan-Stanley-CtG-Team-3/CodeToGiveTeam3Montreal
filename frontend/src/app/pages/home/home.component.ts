@@ -1,10 +1,8 @@
-// home.component.ts
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {ImpactTrackerComponent} from '../../components/impact-tracker/impact-tracker.component';
-import {DonationFormComponent} from '../../components/donation-form/donation-form.component';
 import {AchievementsComponent} from '../../components/achievements/achievements.component';
-import {AiChatComponent} from '../../components/ai-chat/ai-chat.component';
 import {QuizComponent} from '../../components/quiz/quiz.component';
 import {JourneyTimelineComponent} from '../../components/journey-timeline/journey-timeline.component';
 import {LeaderboardComponent} from '../../components/leaderboard/leaderboard.component';
@@ -17,9 +15,7 @@ import {PageComponent} from '../../components/page/page.component';
     CommonModule,
     PageComponent,
     ImpactTrackerComponent,
-    DonationFormComponent,
     AchievementsComponent,
-    AiChatComponent,
     QuizComponent,
     JourneyTimelineComponent,
     LeaderboardComponent
@@ -27,24 +23,19 @@ import {PageComponent} from '../../components/page/page.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-
 export class HomeComponent implements OnInit {
-  config?: any; // Or define a proper interface
-  showChat: boolean = true; // Or false, depending on your needs
+  private router = inject(Router);
+
+  config?: any;
+  showChat: boolean = true;
 
   ngOnInit(): void {
-    // Initialize config if needed
     this.config = {
       impact_counter_title: 'Our Impact'
-      // Add other config properties
     };
   }
 
   onDonateClick(): void {
-    // Implement donation logic
-    // e.g., navigate to donation form or scroll to it
-    const donationSection = document.querySelector('app-donation-form');
-    donationSection?.scrollIntoView({ behavior: 'smooth' });
+    this.router.navigate(['/donate']);
   }
 }
-
