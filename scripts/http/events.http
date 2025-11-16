@@ -34,7 +34,7 @@ Content-Type: application/json
   "email": "george@test.com",
   "amount": 25
 }
-# TODO: Error. check later
+
 ### List event transactions
 GET http://localhost:8080/api/events/1/transactions
 Accept: application/json
