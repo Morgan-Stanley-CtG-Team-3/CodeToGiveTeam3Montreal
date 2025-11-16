@@ -15,8 +15,8 @@ public class DonationEventMapper {
                 event.getDescription(),
                 event.getGoalAmount(),
                 event.getCurrentAmount(),
-                event.getStartDate().toString(),
-                event.getEndDate().toString()
+                event.getStartDate() != null ? event.getStartDate().toString() : null,
+                event.getEndDate() != null ? event.getEndDate().toString() : null
         );
     }
 }
