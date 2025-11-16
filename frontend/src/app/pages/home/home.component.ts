@@ -1,35 +1,37 @@
+// home.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageComponent } from '../../components/page/page.component';
-import { Router } from '@angular/router';
-import { QuizGameComponent } from '../../quiz-game/quiz-game.component';
+import {ImpactTrackerComponent} from '../../components/impact-tracker/impact-tracker.component';
+import {DonationFormComponent} from '../../components/donation-form/donation-form.component';
+import {AchievementsComponent} from '../../components/achievements/achievements.component';
+import {AiChatComponent} from '../../components/ai-chat/ai-chat.component';
+import {QuizComponent} from '../../components/quiz/quiz.component';
+import {JourneyTimelineComponent} from '../../components/journey-timeline/journey-timeline.component';
+import {LeaderboardComponent} from '../../components/leaderboard/leaderboard.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, PageComponent, QuizGameComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  imports: [
+    CommonModule,
+    ImpactTrackerComponent,
+    DonationFormComponent,
+    AchievementsComponent,
+    AiChatComponent,
+    QuizComponent,
+    JourneyTimelineComponent,
+    LeaderboardComponent
+  ],
+  template: `
+    <app-impact-tracker></app-impact-tracker>
+    <app-quiz></app-quiz>
+    <app-donation-form id="donation-section"></app-donation-form>
+    <app-journey-timeline></app-journey-timeline>
+    <app-leaderboard></app-leaderboard>
+    <app-achievements></app-achievements>
+    <app-ai-chat *ngIf="showChat"></app-ai-chat>
+  `
 })
 export class HomeComponent {
-  showQuiz = false;
-
-  constructor(private router: Router) {}
-
-  onDonateClick() {
-    // Navigate to donation page or open donation form
-    console.log('Donate button clicked!');
-    // For now, just scroll to donation section or implement your logic
-  }
-
-  onTakeQuizClick() {
-    this.showQuiz = true;
-    // Scroll to quiz section after a short delay to ensure it's rendered
-    setTimeout(() => {
-      const quizElement = document.getElementById('quiz-section');
-      if (quizElement) {
-        // quizElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
-  }
+  showChat = false;
 }
