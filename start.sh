@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-NO_CLEAN=false
-
 # If first arg is "--no-clean", skip cleanup
 if [ "$1" != "--no-clean" ]; then
     docker-compose down -v
