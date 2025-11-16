@@ -53,7 +53,7 @@ public class SubscriptionService {
     public void cancel(String email) {
         Subscription s = repo
                 .findByUser_EmailAndStatus(email, Status.ACTIVE)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT, "Active subscription not found " +
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Active subscription not found " +
                         "for email: " + email));
         s.setStatus(Status.CANCELED);
         s.setCanceledAt(LocalDateTime.now());
