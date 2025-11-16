@@ -12,6 +12,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class MailNotificationListener {
     private final JavaMailSender mailSender;
 
     @Async
-    @TransactionalEventListener
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void onDonationEventPublished(DonationEventPublished evt) {
         DonationEvent ev = eventRepo.findById(evt.eventId()).orElse(null);
         if (ev == null) return;
