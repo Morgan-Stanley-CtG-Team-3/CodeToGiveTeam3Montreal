@@ -31,49 +31,82 @@
         </div>
       </div>
 
-      <!-- Question Display -->
+      <!-- Question Display - Two Column Layout -->
       <div *ngIf="!quizCompleted" class="mb-8">
-        <h3 class="text-2xl font-bold text-gray-800 mb-6">
-          {{ questions[currentQuestionIndex].question }}
-        </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Left Column: Question and Answers -->
+          <div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">
+              {{ questions[currentQuestionIndex].question }}
+            </h3>
 
-        <!-- Answer Options -->
-        <div class="space-y-4">
-          <button
-            *ngFor="let option of questions[currentQuestionIndex].options; let i = index"
-            (click)="selectAnswer(i)"
-            [disabled]="answerSelected"
-            [ngClass]="{
-              'border-blue-500 bg-blue-50': selectedAnswerIndex === i && !answerSelected,
-              'border-green-500 bg-green-50': answerSelected && option.isCorrect,
-              'border-red-500 bg-red-50': answerSelected && selectedAnswerIndex === i && !option.isCorrect,
-              'border-gray-300 hover:border-blue-400 hover:bg-blue-50': !answerSelected && selectedAnswerIndex !== i,
-              'cursor-not-allowed opacity-60': answerSelected
-            }"
-            class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <div class="flex items-center justify-between">
-              <span class="font-medium text-gray-800">{{ option.text }}</span>
-              <span *ngIf="answerSelected && option.isCorrect" class="text-green-600 text-xl">✓</span>
-              <span *ngIf="answerSelected && selectedAnswerIndex === i && !option.isCorrect" class="text-red-600 text-xl">✗</span>
+            <!-- Answer Options -->
+            <div class="space-y-4">
+              <button
+                *ngFor="let option of questions[currentQuestionIndex].options; let i = index"
+                (click)="selectAnswer(i)"
+                [disabled]="answerSelected"
+                [ngClass]="{
+                  'border-blue-500 bg-blue-50': selectedAnswerIndex === i && !answerSelected,
+                  'border-green-500 bg-green-50': answerSelected && option.isCorrect,
+                  'border-red-500 bg-red-50': answerSelected && selectedAnswerIndex === i && !option.isCorrect,
+                  'border-gray-300 hover:border-blue-400 hover:bg-blue-50': !answerSelected && selectedAnswerIndex !== i,
+                  'cursor-not-allowed opacity-60': answerSelected
+                }"
+                class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="flex items-center justify-between">
+                  <span class="font-medium text-gray-800">{{ option.text }}</span>
+                  <span *ngIf="answerSelected && option.isCorrect" class="text-green-600 text-xl">✓</span>
+                  <span *ngIf="answerSelected && selectedAnswerIndex === i && !option.isCorrect" class="text-red-600 text-xl">✗</span>
+                </div>
+              </button>
             </div>
-          </button>
-        </div>
-
-        <!-- Explanation -->
-        <div class="feedback" *ngIf="selectedAnswerIndex !== null">
-          <div class="feedback-message"
-               [class.correct]="questions[currentQuestionIndex].options[selectedAnswerIndex].isCorrect"
-               [class.incorrect]="!questions[currentQuestionIndex].options[selectedAnswerIndex].isCorrect">
-            {{ questions[currentQuestionIndex].options[selectedAnswerIndex].isCorrect ? '✓' : '✗' }}
-            {{ questions[currentQuestionIndex].options[selectedAnswerIndex].isCorrect ? 'Correct!' : 'Incorrect' }}
           </div>
-        </div>
 
-        <div class="flex items-start">
-            <span class="text-2xl mr-3">
-              {{ selectedAnswerIndex !== null ? (questions[currentQuestionIndex].options[selectedAnswerIndex]?.isCorrect ? '✓' : '✗') : '' }}
-            </span>
-          <p class="text-gray-700">{{ questions[currentQuestionIndex].explanation }}</p>
+          <!-- Right Column: Explanation (shown only after answer) -->
+          <div *ngIf="answerSelected && selectedAnswerIndex !== null" class="explanation-panel">
+            <div class="sticky top-8">
+              <!-- Feedback Badge -->
+              <div class="mb-6 flex items-center justify-center">
+                <div
+                  [ngClass]="{
+                    'bg-green-100 text-green-700 border-green-300': questions[currentQuestionIndex].options[selectedAnswerIndex!].isCorrect,
+                    'bg-red-100 text-red-700 border-red-300': !questions[currentQuestionIndex].options[selectedAnswerIndex!].isCorrect
+                  }"
+                  class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 font-bold text-xl">
+                  <span class="text-3xl">
+                    {{ questions[currentQuestionIndex].options[selectedAnswerIndex!].isCorrect ? '✓' : '✗' }}
+                  </span>
+                  <span>
+                    {{ questions[currentQuestionIndex].options[selectedAnswerIndex!].isCorrect ? 'Correct!' : 'Incorrect' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Emotional Explanation -->
+              <div class="explanation-content bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-indigo-200 shadow-lg">
+                <div class="flex items-start gap-4">
+                  <span class="text-4xl flex-shrink-0">💡</span>
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Did you know?</h4>
+                    <p class="text-lg leading-relaxed text-gray-700 explanation-text">
+                      {{ questions[currentQuestionIndex].explanation }}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Emotional Impact Message -->
+                <div class="mt-6 pt-6 border-t border-indigo-200">
+                  <div class="flex items-start gap-3">
+                    <span class="text-2xl">❤️</span>
+                    <p class="text-base text-gray-600 italic">
+                      {{ getEmotionalMessage() }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

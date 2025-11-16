@@ -20,6 +20,54 @@ button:focus-visible {
   @apply text-base leading-relaxed;
 }
 
+/* Explanation panel animation */
+.explanation-panel {
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Explanation text styling - larger and more readable */
+.explanation-text {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Emotional message styling */
+.explanation-content {
+  transition: all 0.3s ease;
+}
+
+.explanation-content:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* Pulse animation for emotional impact */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.explanation-content {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
 /* Responsive text sizing */
 @media (max-width: 640px) {
   h2 {
@@ -28,5 +76,17 @@ button:focus-visible {
 
   h3 {
     @apply text-xl;
+  }
+
+  .explanation-text {
+    font-size: 1rem; /* 16px on mobile */
+  }
+}
+
+/* Sticky positioning for explanation on scroll */
+@media (min-width: 1024px) {
+  .explanation-panel .sticky {
+    position: sticky;
+    top: 2rem;
   }
 }
