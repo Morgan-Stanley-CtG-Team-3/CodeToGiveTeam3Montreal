@@ -143,4 +143,16 @@ export class QuizComponent {
       return '💡 Thank you for taking the quiz! Every question teaches us something new. Your support helps fund education programs that can prevent violence before it starts.';
     }
   }
+
+  getEmotionalMessage(): string {
+    const emotionalMessages = [
+      "Every statistic represents a real person with hopes, dreams, and a right to live without fear. Your awareness can be the light that guides someone to safety.",
+      "Behind every form of abuse is a person struggling in silence. Understanding these different faces of violence helps us recognize when someone needs our help.",
+      "Leaving takes immense courage. Survivors need our compassion, not judgment. Your support during this critical time can literally save a life.",
+      "Children carry these invisible scars into adulthood. But with proper support and love, healing is possible. Every child deserves to grow up feeling safe.",
+      "Sometimes the most powerful thing we can do is simply listen and believe. Your compassion can be the first step in someone's journey to freedom and healing."
+    ];
+
+    return emotionalMessages[this.currentQuestionIndex] || "Your knowledge and compassion can make a real difference in someone's life.";
+  }
 }
