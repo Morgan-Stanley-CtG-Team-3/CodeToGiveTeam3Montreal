@@ -17,6 +17,7 @@ export class NavbarComponent {
   isLoggedIn = false; // État de connexion
   isLoginModalOpen = false;
   isSignupModalOpen = false;
+  isAuthChoiceModalOpen = false;
 
   // Login form data
   loginEmail = '';
@@ -45,7 +46,35 @@ export class NavbarComponent {
 
   navigateToDonate(): void {
     this.closeMenu();
+    if (this.isLoggedIn) {
+      this.router.navigate(['/donate']);
+    } else {
+      this.openAuthChoiceModal();
+    }
+  }
+
+  // Auth choice modal methods
+  openAuthChoiceModal(): void {
+    this.isAuthChoiceModalOpen = true;
+  }
+
+  closeAuthChoiceModal(): void {
+    this.isAuthChoiceModalOpen = false;
+  }
+
+  continueAsGuest(): void {
+    this.closeAuthChoiceModal();
     this.router.navigate(['/donate']);
+  }
+
+  openLoginFromAuthChoice(): void {
+    this.closeAuthChoiceModal();
+    this.openLoginModal();
+  }
+
+  openSignupFromAuthChoice(): void {
+    this.closeAuthChoiceModal();
+    this.openSignupModal();
   }
 
   // Login modal methods
