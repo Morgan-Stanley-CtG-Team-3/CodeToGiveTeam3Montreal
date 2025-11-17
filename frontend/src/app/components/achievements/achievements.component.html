@@ -196,25 +196,6 @@
         </p>
       </div>
 
-      <!-- Call to Action (when user has no badges) -->
-      <div
-        *ngIf="displayBadges.length > 0 && userBadges.length === 0"
-        class="text-center py-12 mt-8 bg-white rounded-xl shadow-sm border border-gray-200"
-      >
-        <div class="text-6xl mb-4">🚀</div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">
-          Start Your Journey
-        </h3>
-        <p class="text-gray-600 mb-6">
-          Make your first donation to unlock achievements and track your impact!
-        </p>
-        <button
-          (click)="scrollToDonation()"
-          class="inline-flex items-center px-6 py-3 bg-red-600 text-white font-semibold rounded-full hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-        >
-          Make First Donation
-        </button>
-      </div>
     </ng-container>
   </div>
 </section>

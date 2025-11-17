@@ -52,7 +52,7 @@
           (input)="onCustomAmountChange()"
           min="1"
           step="1"
-          class="w-full pl-10 pr-4 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
+          class="w-full pl-10 pr-4 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all"
           placeholder="Enter amount"
           aria-label="Custom donation amount in dollars">
       </div>
@@ -117,7 +117,7 @@
             type="text"
             id="firstName"
             formControlName="firstName"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-400 focus:ring-4 focus:ring-blue-200 outline-none transition-all"
             [class.border-red-500]="donorForm.get('firstName')?.invalid && donorForm.get('firstName')?.touched"
             aria-required="true"
             aria-describedby="firstName-error">
@@ -137,7 +137,7 @@
             type="text"
             id="lastName"
             formControlName="lastName"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all"
             [class.border-red-500]="donorForm.get('lastName')?.invalid && donorForm.get('lastName')?.touched"
             aria-required="true"
             aria-describedby="lastName-error">
@@ -158,7 +158,7 @@
           type="email"
           id="email"
           formControlName="email"
-          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
+          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all"
           [class.border-red-500]="donorForm.get('email')?.invalid && donorForm.get('email')?.touched"
           aria-required="true"
           aria-describedby="email-error">
@@ -178,7 +178,7 @@
           type="tel"
           id="phone"
           formControlName="phone"
-          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
+          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all"
           aria-describedby="phone-help">
         <p id="phone-help" class="mt-1 text-sm text-gray-600">
           We'll only use this for donation receipts
@@ -191,7 +191,7 @@
           type="checkbox"
           id="anonymous"
           formControlName="anonymous"
-          class="w-5 h-5 text-green-600 border-2 border-gray-300 rounded focus:ring-4 focus:ring-green-200 cursor-pointer">
+          class="w-5 h-5 text-blue-600 border-2 border-gray-300 rounded focus:ring-4 focus:ring-blue-200 cursor-pointer">
         <label for="anonymous" class="text-gray-700 font-medium cursor-pointer">
           Make my donation anonymous
         </label>
@@ -218,7 +218,7 @@
             formControlName="cardNumber"
             placeholder="1234 5678 9012 3456"
             maxlength="19"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all font-mono"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all font-mono"
             [class.border-red-500]="donorForm.get('cardNumber')?.invalid && donorForm.get('cardNumber')?.touched"
             aria-required="true">
         </div>
@@ -235,7 +235,7 @@
               formControlName="expiryDate"
               placeholder="MM/YY"
               maxlength="5"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all font-mono"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all font-mono"
               aria-required="true">
           </div>
 
@@ -250,7 +250,7 @@
               formControlName="cvv"
               placeholder="123"
               maxlength="4"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all font-mono"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-4 focus:ring-blue-200 outline-none transition-all font-mono"
               aria-required="true">
           </div>
         </div>

@@ -89,13 +89,13 @@ They automatically build containers, start the database, and launch the applicat
 
 # Remove containers & volumes
 ./start.sh --clean
-.\start.ps1 --clean
+.\start.ps1 -clean
 
 # Verbose/logging mode (foreground)
 ./start.sh -v
 ./start.sh --verbose
 .\start.ps1 -v
-.\start.ps1 --verbose
+.\start.ps1 -verbose
 ```
 
 ### Docker-based development (manual)

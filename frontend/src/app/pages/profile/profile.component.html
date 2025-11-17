@@ -41,13 +41,16 @@
     <section class="section-wrapper">
       <h2>My achievements</h2>
       <app-achievements></app-achievements>
+
+      <app-social-share
+        class="scale-75"
+        [title]="'Check out my achievements on Shield of Athena!'"
+        [description]="
+          'I am supporting families in need through Shield of Athena. Join me in making a difference!'
+        "
+      ></app-social-share>
     </section>
 
-    <!-- Journey Timeline Section -->
-    <section class="section-wrapper">
-      <h2>Journey</h2>
-      <app-journey-timeline></app-journey-timeline>
-    </section>
 
     <!-- Leaderboard Section -->
     <section class="section-wrapper">

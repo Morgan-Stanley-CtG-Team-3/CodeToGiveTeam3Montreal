@@ -16,7 +16,7 @@ input, button, select {
 
 /* Focus visible for keyboard navigation */
 *:focus-visible {
-  outline: 2px solid #5de244;
+  outline: 2px solid #447be2;
   outline-offset: 2px;
 }
 
