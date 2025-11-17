@@ -104,7 +104,7 @@ Rebuild everything, reset volumes, and start all services:
 docker compose down -v && docker compose up --build
 ```
 ## API Documentation
-API Documentation can be found at www.donatewithathena.com/swagger
+API Documentation can be found with swagger: localhost:8080/swagger
 ## TEAM 3 \- Authors (UQAM)
 
 Main Frontend:  
