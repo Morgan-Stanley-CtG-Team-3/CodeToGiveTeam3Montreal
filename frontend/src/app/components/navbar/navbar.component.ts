@@ -1,10 +1,12 @@
 // File: frontend/src/app/components/navbar/navbar.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { N8nFormComponent } from '../n8n-form/n8n-form.component';
+import { AuthModalService } from '../../services/auth-modal.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +14,7 @@ import { N8nFormComponent } from '../n8n-form/n8n-form.component';
   imports: [CommonModule, RouterModule, FormsModule, N8nFormComponent],
   templateUrl: './navbar.component.html'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
   isLoggedIn = false; // État de connexion
   isLoginModalOpen = false;
@@ -35,7 +37,27 @@ export class NavbarComponent {
   signupPostalCode = '';
   signupCountry = '';
 
-  constructor(private router: Router) {}
+  private authModalSubscription: Subscription | null = null;
+
+  constructor(
+    private router: Router,
+    private authModalService: AuthModalService
+  ) {}
+
+  ngOnInit(): void {
+    // Subscribe to auth modal service
+    this.authModalSubscription = this.authModalService.showAuthChoiceModal$.subscribe(
+      (show) => {
+        this.isAuthChoiceModalOpen = show;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.authModalSubscription) {
+      this.authModalSubscription.unsubscribe();
+    }
+  }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -56,26 +78,39 @@ export class NavbarComponent {
 
   // Auth choice modal methods
   openAuthChoiceModal(): void {
-    this.isAuthChoiceModalOpen = true;
+    this.authModalService.openAuthChoiceModal();
   }
 
   closeAuthChoiceModal(): void {
-    this.isAuthChoiceModalOpen = false;
+    this.authModalService.closeAuthChoiceModal();
   }
 
   continueAsGuest(): void {
-    this.closeAuthChoiceModal();
-    this.router.navigate(['/donate']);
+    const eventInfo = this.authModalService.getPendingEventInfo();
+    this.authModalService.closeAuthChoiceModal();
+    
+    if (eventInfo.eventId && eventInfo.eventTitle) {
+      // Navigate to donate with event info
+      this.router.navigate(['/donate'], {
+        queryParams: {
+          eventId: eventInfo.eventId,
+          eventTitle: eventInfo.eventTitle,
+        },
+      });
+      this.authModalService.clearPendingEventInfo();
+    } else {
+      this.router.navigate(['/donate']);
+    }
   }
 
   openLoginFromAuthChoice(): void {
-    this.closeAuthChoiceModal();
+    this.authModalService.closeAuthChoiceModal();
     this.redirectToDonateAfterAuth = true;
     this.openLoginModal();
   }
 
   openSignupFromAuthChoice(): void {
-    this.closeAuthChoiceModal();
+    this.authModalService.closeAuthChoiceModal();
     this.redirectToDonateAfterAuth = true;
     this.openSignupModal();
   }
@@ -105,7 +140,19 @@ export class NavbarComponent {
     // Rediriger vers donate si on vient du modal de choix
     if (this.redirectToDonateAfterAuth) {
       this.redirectToDonateAfterAuth = false;
-      this.router.navigate(['/donate']);
+      const eventInfo = this.authModalService.getPendingEventInfo();
+      
+      if (eventInfo.eventId && eventInfo.eventTitle) {
+        this.router.navigate(['/donate'], {
+          queryParams: {
+            eventId: eventInfo.eventId,
+            eventTitle: eventInfo.eventTitle,
+          },
+        });
+        this.authModalService.clearPendingEventInfo();
+      } else {
+        this.router.navigate(['/donate']);
+      }
     }
   }
 
@@ -150,7 +197,19 @@ export class NavbarComponent {
     // Rediriger vers donate si on vient du modal de choix
     if (this.redirectToDonateAfterAuth) {
       this.redirectToDonateAfterAuth = false;
-      this.router.navigate(['/donate']);
+      const eventInfo = this.authModalService.getPendingEventInfo();
+      
+      if (eventInfo.eventId && eventInfo.eventTitle) {
+        this.router.navigate(['/donate'], {
+          queryParams: {
+            eventId: eventInfo.eventId,
+            eventTitle: eventInfo.eventTitle,
+          },
+        });
+        this.authModalService.clearPendingEventInfo();
+      } else {
+        this.router.navigate(['/donate']);
+      }
     }
   }
 
