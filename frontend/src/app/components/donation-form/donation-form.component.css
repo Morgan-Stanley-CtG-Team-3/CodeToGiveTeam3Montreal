@@ -2,7 +2,7 @@
 
 .amount-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(171, 227, 138, 0.2);
 }
 
 .amount-btn:active {
@@ -16,7 +16,7 @@ input, button, select {
 
 /* Focus visible for keyboard navigation */
 *:focus-visible {
-  outline: 2px solid #ef4444;
+  outline: 2px solid #5de244;
   outline-offset: 2px;
 }
 

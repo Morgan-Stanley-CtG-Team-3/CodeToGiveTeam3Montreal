@@ -1,0 +1,195 @@
+<app-page [fullWidth]="true">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <nav class="text-sm mb-4">
+          <span class="opacity-80">Shield of Athena</span>
+          <span class="mx-2">></span>
+          <span class="opacity-80">Dashboard</span>
+          <span class="mx-2">></span>
+          <span>Admin</span>
+        </nav>
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl font-bold">Dashboard</h1>
+          <button
+            (click)="createReport()"
+            class="bg-white text-indigo-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+            Create Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Revenue Chart -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-900">Donations Revenue</h2>
+            <div class="flex gap-2">
+              <button
+                (click)="selectPeriod('week')"
+                [class.bg-indigo-50]="selectedPeriod === 'week'"
+                [class.text-indigo-600]="selectedPeriod === 'week'"
+                [class.text-gray-600]="selectedPeriod !== 'week'"
+                class="px-4 py-2 text-sm font-medium hover:bg-gray-50 rounded-lg">
+                This Week
+              </button>
+              <button
+                (click)="selectPeriod('lastWeek')"
+                [class.bg-indigo-50]="selectedPeriod === 'lastWeek'"
+                [class.text-indigo-600]="selectedPeriod === 'lastWeek'"
+                [class.text-gray-600]="selectedPeriod !== 'lastWeek'"
+                class="px-4 py-2 text-sm font-medium hover:bg-gray-50 rounded-lg">
+                Last Week
+              </button>
+              <button
+                (click)="selectPeriod('month')"
+                [class.bg-indigo-50]="selectedPeriod === 'month'"
+                [class.text-indigo-600]="selectedPeriod === 'month'"
+                [class.text-gray-600]="selectedPeriod !== 'month'"
+                class="px-4 py-2 text-sm font-medium hover:bg-gray-50 rounded-lg">
+                Last Month
+              </button>
+            </div>
+          </div>
+          <div class="h-64 flex items-end justify-between gap-2">
+            <div *ngFor="let data of revenueData"
+                 class="flex-1 bg-gradient-to-t from-teal-400 to-teal-500 rounded-t transition-all duration-300"
+                 [style.height]="getRevenueHeight(data.value)">
+            </div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-500 mt-2">
+            <span *ngFor="let data of revenueData">{{ data.month }}</span>
+          </div>
+        </div>
+
+        <!-- Total Donors Donut Chart -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-900">Total Donors</h2>
+            <button class="text-gray-400 hover:text-gray-600">⋯</button>
+          </div>
+          <div class="flex justify-center items-center h-64">
+            <div class="relative w-48 h-48">
+              <svg class="w-full h-full" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="20"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#1e3a8a" stroke-width="20"
+                        stroke-dasharray="157 251" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#ec4899" stroke-width="20"
+                        stroke-dasharray="62 251" stroke-dashoffset="-157" transform="rotate(-90 50 50)"/>
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#6b7280" stroke-width="20"
+                        stroke-dasharray="50 251" stroke-dashoffset="-219" transform="rotate(-90 50 50)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Report Download -->
+      <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+        <div class="flex justify-between items-center">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Download your donation report</h2>
+            <p class="text-gray-500 text-sm">Generate comprehensive reports for all donation activities</p>
+          </div>
+          <button
+            (click)="createReport()"
+            class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition">
+            Create Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Revenue Card -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl shadow-sm p-6 mb-6 text-white">
+        <div class="grid grid-cols-2 gap-8">
+          <div>
+            <p class="text-gray-400 text-sm mb-2">This Month Revenue</p>
+            <p class="text-4xl font-bold">{{ formatCurrency(thisMonthRevenue) }}</p>
+            <p [class.text-green-400]="thisMonthChange > 0"
+               [class.text-red-400]="thisMonthChange < 0"
+               class="text-sm mt-1">
+              {{ thisMonthChange > 0 ? '↑' : '↓' }} {{ getAbsoluteValue(thisMonthChange) }}%
+              {{ thisMonthChange > 0 ? 'Up' : 'Down' }} From Last Month
+            </p>
+          </div>
+          <div class="opacity-50">
+            <p class="text-gray-400 text-sm mb-2">Last Month Revenue</p>
+            <p class="text-4xl font-bold">{{ formatCurrency(lastMonthRevenue) }}</p>
+            <p [class.text-green-400]="lastMonthChange > 0"
+               [class.text-red-400]="lastMonthChange < 0"
+               class="text-sm mt-1">
+              {{ lastMonthChange > 0 ? '↑' : '↓' }} {{ getAbsoluteValue(lastMonthChange) }}%
+              {{ lastMonthChange > 0 ? 'Up' : 'Down' }} From Last Month
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Daily Donations -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-900">Daily Donations</h2>
+            <button class="text-gray-400 hover:text-gray-600">⋯</button>
+          </div>
+          <div class="h-32">
+            <svg class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
+              <polyline fill="none" stroke="#14b8a6" stroke-width="2"
+                        points="0,70 25,60 50,55 75,65 100,50 125,45 150,48 175,42 200,40 225,38 250,35 275,32 300,30"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-900">Summary</h2>
+            <button class="text-gray-400 hover:text-gray-600">⋯</button>
+          </div>
+          <div class="space-y-4">
+            <div *ngFor="let item of summaryData">
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-600">{{ item.label }}</span>
+                <span class="text-gray-900 font-medium">{{ item.percentage }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div [class]="item.color + ' h-2 rounded-full transition-all duration-500'"
+                     [style.width.%]="item.percentage"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Donors -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-semibold text-gray-900">Total Donors</h2>
+            <div class="flex gap-2">
+              <button class="px-3 py-1 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg">Today</button>
+              <button class="px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">This week</button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <p class="text-6xl font-bold text-indigo-600">{{ totalDonors }}</p>
+            <div class="h-24 w-24">
+              <div class="flex gap-1 h-full items-end">
+                <div *ngFor="let height of donorTrend"
+                     class="flex-1 rounded-t transition-all duration-300"
+                     [class.bg-teal-400]="height === 100"
+                     [class.bg-gray-200]="height !== 100"
+                     [style.height.%]="height">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</app-page>

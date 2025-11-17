@@ -10,15 +10,15 @@
         *ngFor="let amount of presetAmounts"
         (click)="selectAmount(amount)"
         [class.ring-4]="selectedAmount === amount"
-        [class.ring-red-500]="selectedAmount === amount"
-        [class.bg-red-50]="selectedAmount === amount"
-        class="relative p-6 rounded-xl border-2 border-gray-200 hover:border-red-400 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-500"
+        [class.ring-green-500]="selectedAmount === amount"
+        [class.bg-green-50]="selectedAmount === amount"
+        class="relative p-6 rounded-xl border-2 border-gray-200 hover:border-green-400 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-500"
         [attr.aria-pressed]="selectedAmount === amount"
         [attr.aria-label]="'Donate ' + amount + ' dollars'">
         <div class="text-2xl font-bold text-gray-900">${{amount}}</div>
         <div class="text-sm text-gray-600 mt-1">{{getImpactText(amount)}}</div>
         <div *ngIf="selectedAmount === amount"
-             class="absolute top-2 right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"
+             class="absolute top-2 right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
              aria-hidden="true">
           <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -41,7 +41,7 @@
           (input)="onCustomAmountChange()"
           min="1"
           step="1"
-          class="w-full pl-10 pr-4 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+          class="w-full pl-10 pr-4 py-4 text-xl font-semibold border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
           placeholder="Enter amount"
           aria-label="Custom donation amount in dollars">
       </div>
@@ -74,7 +74,7 @@
 
     <!-- Impact Display -->
     <div *ngIf="selectedAmount > 0"
-         class="p-6 bg-gradient-to-r from-red-50 to-pink-50 rounded-xl border-2 border-red-200"
+         class="p-6 bg-gradient-to-r from-green-50 to-pink-50 rounded-xl border-2 border-green-200"
          role="status"
          aria-live="polite">
       <div class="flex items-start gap-3">
@@ -83,7 +83,7 @@
           <h3 class="font-bold text-gray-900 text-lg mb-2">Your Impact</h3>
           <p class="text-gray-700">
             Your {{isRecurring ? 'monthly' : ''}} donation of
-            <span class="font-bold text-red-600">${{selectedAmount}}</span>
+            <span class="font-bold text-green-600">${{selectedAmount}}</span>
             will {{getDetailedImpact()}}
           </p>
         </div>
@@ -106,7 +106,7 @@
             type="text"
             id="firstName"
             formControlName="firstName"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
             [class.border-red-500]="donorForm.get('firstName')?.invalid && donorForm.get('firstName')?.touched"
             aria-required="true"
             aria-describedby="firstName-error">
@@ -126,7 +126,7 @@
             type="text"
             id="lastName"
             formControlName="lastName"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
             [class.border-red-500]="donorForm.get('lastName')?.invalid && donorForm.get('lastName')?.touched"
             aria-required="true"
             aria-describedby="lastName-error">
@@ -147,7 +147,7 @@
           type="email"
           id="email"
           formControlName="email"
-          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
           [class.border-red-500]="donorForm.get('email')?.invalid && donorForm.get('email')?.touched"
           aria-required="true"
           aria-describedby="email-error">
@@ -167,7 +167,7 @@
           type="tel"
           id="phone"
           formControlName="phone"
-          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all"
+          class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all"
           aria-describedby="phone-help">
         <p id="phone-help" class="mt-1 text-sm text-gray-600">
           We'll only use this for donation receipts
@@ -180,7 +180,7 @@
           type="checkbox"
           id="anonymous"
           formControlName="anonymous"
-          class="w-5 h-5 text-red-600 border-2 border-gray-300 rounded focus:ring-4 focus:ring-red-200 cursor-pointer">
+          class="w-5 h-5 text-green-600 border-2 border-gray-300 rounded focus:ring-4 focus:ring-green-200 cursor-pointer">
         <label for="anonymous" class="text-gray-700 font-medium cursor-pointer">
           Make my donation anonymous
         </label>
@@ -207,7 +207,7 @@
             formControlName="cardNumber"
             placeholder="1234 5678 9012 3456"
             maxlength="19"
-            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all font-mono"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all font-mono"
             [class.border-red-500]="donorForm.get('cardNumber')?.invalid && donorForm.get('cardNumber')?.touched"
             aria-required="true">
         </div>
@@ -224,7 +224,7 @@
               formControlName="expiryDate"
               placeholder="MM/YY"
               maxlength="5"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all font-mono"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all font-mono"
               aria-required="true">
           </div>
 
@@ -239,7 +239,7 @@
               formControlName="cvv"
               placeholder="123"
               maxlength="4"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-4 focus:ring-red-200 outline-none transition-all font-mono"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-4 focus:ring-green-200 outline-none transition-all font-mono"
               aria-required="true">
           </div>
         </div>
@@ -251,7 +251,7 @@
         [disabled]="!donorForm.valid || selectedAmount === 0 || isProcessing"
         [class.opacity-50]="!donorForm.valid || selectedAmount === 0 || isProcessing"
         [class.cursor-not-allowed]="!donorForm.valid || selectedAmount === 0 || isProcessing"
-        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-500 disabled:hover:bg-red-600 text-lg">
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-green-500 disabled:hover:bg-green-600 text-lg">
         <span *ngIf="!isProcessing">
           🛡️ Complete Donation of ${{selectedAmount}}{{isRecurring ? '/month' : ''}}
         </span>
