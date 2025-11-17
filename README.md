@@ -112,7 +112,7 @@ Dev Ops / Problem Solving:
 \-\-\> Richard Demers \- UQAM
 
 Product Manager:  
-\-\-\> Mattéo Destrie\-\-Terrighi \- UQAM
+\-\-\> Mattéo Destriez\-\-Terrighi \- UQAM
 
 ## Acknowledgments
 \* Morgan Stanley Code To Give program.  
