@@ -81,16 +81,23 @@ Ensure you have the following installed:
 For the fastest and most reliable development setup, use the provided start scripts.  
 They automatically build containers, start the database, and launch the application.
 
-#### Usage (Unix/macOS/Linux)
+#### Usage (Unix/macOS/Linux & Windows PowerShell)
 ```bash
-./start.sh --noclean     # Keeps persistent volumes (no DB reset)
+# Normal start (detached)
 ./start.sh
-```
-#### Usage (Windows PowerShell)
-```pwsh
-.\start.ps1 -NoClean      # Keeps persistent volumes (no DB reset)
 .\start.ps1
+
+# Remove containers & volumes
+./start.sh --clean
+.\start.ps1 --clean
+
+# Verbose/logging mode (foreground)
+./start.sh -v
+./start.sh --verbose
+.\start.ps1 -v
+.\start.ps1 --verbose
 ```
+
 ### Docker-based development (manual)
 Rebuild everything, reset volumes, and start all services:
 ```bash
