@@ -76,4 +76,16 @@ export class AdminComponent implements OnInit {
     console.log('Creating report...');
     // Implement report generation logic
   }
+
+  openAiPostMaker(): void {
+    const url = 'https://jofam.app.n8n.cloud/form/1c30918f-c0ca-4a86-9701-8877c81a6df8';
+    const title = 'AI Post Maker & Uploader (Shield of Athena)';
+    const width = 900;
+    const height = 700;
+    const left = (window.screenX || 0) + (window.outerWidth - width) / 2;
+    const top = (window.screenY || 0) + (window.outerHeight - height) / 2;
+    const features = `width=${width},height=${height},left=${Math.round(left)},top=${Math.round(top)},resizable=yes,scrollbars=yes,status=yes,noopener,noreferrer`;
+    const win = window.open(url, title, features);
+    if (win) win.focus();
+  }
 }

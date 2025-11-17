@@ -10,11 +10,16 @@
           <span class="mx-2">></span>
           <span>Admin</span>
         </nav>
-        <div class="flex justify-between items-center">
-          <h1 class="text-3xl font-bold">Dashboard</h1>
+        <div class="flex items-right gap-2">
+            
+          <button
+            (click)="openAiPostMaker()"
+            class="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+            AI Post Maker & Uploader
+          </button>
           <button
             (click)="createReport()"
-            class="bg-white text-indigo-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+            class="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
             Create Report
           </button>
         </div>
