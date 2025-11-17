@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {PageComponent} from '../../components/page/page.component';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../../services/api.service';
 
 interface MonthlyData {
   month: string;
@@ -16,7 +18,7 @@ interface DonorSegment {
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, PageComponent],
+  imports: [CommonModule, PageComponent, ReactiveFormsModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -41,6 +43,25 @@ export class AdminComponent implements OnInit {
     { label: 'Monthly Recurring', percentage: 70, color: 'bg-blue-500' },
     { label: 'Corporate Partners', percentage: 34, color: 'bg-green-400' }
   ];
+
+  showEventForm = false;
+  eventForm: FormGroup;
+  submittingEvent = false;
+
+  showToast = false;
+  toastMessage = '';
+  toastType: 'success' | 'error' = 'success';
+  private toastTimeout?: any;
+
+  constructor(private fb: FormBuilder, private api: ApiService) {
+    this.eventForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(255)]],
+      description: [''],
+      goalAmount: [null, [Validators.required, Validators.min(0)]],
+      startDate: [''], // yyyy-MM-dd string from <input type="date">
+      endDate: ['']
+    });
+  }
 
   ngOnInit() {
     this.loadRevenueData();
@@ -87,5 +108,63 @@ export class AdminComponent implements OnInit {
     const features = `width=${width},height=${height},left=${Math.round(left)},top=${Math.round(top)},resizable=yes,scrollbars=yes,status=yes,noopener,noreferrer`;
     const win = window.open(url, title, features);
     if (win) win.focus();
+  }
+
+  openAddEventForm() {
+    this.showEventForm = true;
+    this.eventForm.reset({
+      title: '',
+      description: '',
+      goalAmount: null,
+      startDate: '',
+      endDate: ''
+    });
+  }
+
+  closeAddEventForm() {
+    this.showEventForm = false;
+  }
+
+  submitEvent() {
+    if (this.eventForm.invalid || this.submittingEvent) {
+      this.eventForm.markAllAsTouched();
+      return;
+    }
+
+    const { title, description, goalAmount, startDate, endDate } = this.eventForm.value;
+
+    const payload: any = {
+      title,
+      description: description || '',
+      goalAmount: Number(goalAmount ?? 0),
+    };
+    if (startDate) payload.startDate = startDate; // yyyy-MM-dd
+    if (endDate) payload.endDate = endDate;
+
+    this.submittingEvent = true;
+    this.api.createEvent(payload).subscribe({
+      next: () => {
+        this.submittingEvent = false;
+        this.closeAddEventForm();
+        this.showToastMessage('Event created successfully', 'success');
+      },
+      error: (err) => {
+        console.error('Failed creating event', err);
+        this.submittingEvent = false;
+        this.showToastMessage('Failed to create event', 'error');
+      }
+    });
+  }
+
+  private showToastMessage(message: string, type: 'success' | 'error') {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    if (this.toastTimeout) {
+      clearTimeout(this.toastTimeout);
+    }
+    this.toastTimeout = setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
   }
 }
