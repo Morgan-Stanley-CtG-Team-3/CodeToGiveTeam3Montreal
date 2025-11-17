@@ -23,6 +23,11 @@
             AI Post Maker & Uploader
           </button>
           <button
+            (click)="createEmailNotifications()"
+            class="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+            Send Emails for Active Events
+          </button>
+          <button
             (click)="createReport()"
             class="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
             Create Report
@@ -117,7 +122,8 @@
               </button>
             </div>
           </div>
-          <div class="h-64 flex items-end justify-between gap-2">
+          <div
+            class="h-64 flex items-end justify-between gap-2 overflow-hidden pt-4">
             <div *ngFor="let data of revenueData"
                  class="flex-1 bg-gradient-to-t from-teal-400 to-teal-500 rounded-t transition-all duration-300"
                  [style.height]="getRevenueHeight(data.value)">

@@ -56,5 +56,12 @@ public class DonationEventService {
         );
     }
 
+    public void notifyAllActiveEvents() {
+        List<DonationEvent> activeEvents = eventRepo.findByActiveTrue();
+        for (DonationEvent event : activeEvents) {
+            publisher.publishEvent(new DonationEventPublished(event.getId()));
+        }
+    }
+
     public record DonationEventPublished(Long eventId) { }
 }

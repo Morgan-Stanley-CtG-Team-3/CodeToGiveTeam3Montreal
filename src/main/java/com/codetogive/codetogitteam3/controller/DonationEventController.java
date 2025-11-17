@@ -56,4 +56,11 @@ public class DonationEventController {
     public ResponseEntity<TransactionResponseDTO> donate(@PathVariable Long id, @RequestBody DonationRequestDTO req) {
         return ResponseEntity.ok(TransactionMapper.toDTO(service.donate(id, req.email(), req.amount())));
     }
+
+    @PostMapping("/notify")
+    @Operation(summary = "Send emails for all active events")
+    public ResponseEntity<Void> notifyAllActiveEvents() {
+        service.notifyAllActiveEvents();
+        return ResponseEntity.ok().build();
+    }
 }
