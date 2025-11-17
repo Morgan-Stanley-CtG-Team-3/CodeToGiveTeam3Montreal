@@ -17,7 +17,7 @@ docker-compose up -d --build db
 Write-Host "[INFO] Waiting for database to initialize..."
 Start-Sleep -Seconds 15
 
-if ($VerboseMode) {
+if ($verbose -or $v) {
     docker-compose up --build app
 } else {
     docker-compose up -d --build app
