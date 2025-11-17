@@ -67,4 +67,8 @@ export class ApiService {
   getUserBadges(userId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.base}/badges/user/${userId}`);
   }
+
+  notifyAllActiveEvents(): Observable<void> {
+    return this.http.post<void>(`${this.base}/events/notify`, null, this.authHeaders());
+  }
 }

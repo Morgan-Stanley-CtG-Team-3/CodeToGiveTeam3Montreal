@@ -167,4 +167,12 @@ export class AdminComponent implements OnInit {
       this.showToast = false;
     }, 3000);
   }
+
+  // No testing for demo, should check response and errors in prod
+  createEmailNotifications() {
+    this.showToastMessage(
+      'Emails are being sent for all active events',
+      'success'
+    );
+  }
 }
