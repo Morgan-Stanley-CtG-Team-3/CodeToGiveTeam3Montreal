@@ -1,13 +1,25 @@
-# If first arg is "--no-clean", skip cleanup
-if ($args.Count -eq 0 -or $args[0] -ne "--no-clean") {
+#!/usr/bin/env pwsh
+
+param(
+    [switch]$clean,
+    [switch]$verbose,
+    [switch]$v
+)
+
+if ($clean) {
+    Write-Host "[INFO] Cleaning previous containers & volumes..."
     docker-compose down -v
 }
 
-# Build and start database
+Write-Host "[INFO] Starting database..."
 docker-compose up -d --build db
 
-# Wait for initialization
+Write-Host "[INFO] Waiting for database to initialize..."
 Start-Sleep -Seconds 15
 
-# Build and start app
-docker-compose up --build app
+if ($VerboseMode) {
+    docker-compose up --build app
+} else {
+    docker-compose up -d --build app
+    Write-Host "[INFO] App running in detached mode."
+}
