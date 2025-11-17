@@ -18,6 +18,7 @@ export class NavbarComponent {
   isLoginModalOpen = false;
   isSignupModalOpen = false;
   isAuthChoiceModalOpen = false;
+  redirectToDonateAfterAuth = false; // Flag pour rediriger vers donate après auth
 
   // Login form data
   loginEmail = '';
@@ -69,11 +70,13 @@ export class NavbarComponent {
 
   openLoginFromAuthChoice(): void {
     this.closeAuthChoiceModal();
+    this.redirectToDonateAfterAuth = true;
     this.openLoginModal();
   }
 
   openSignupFromAuthChoice(): void {
     this.closeAuthChoiceModal();
+    this.redirectToDonateAfterAuth = true;
     this.openSignupModal();
   }
 
@@ -98,6 +101,12 @@ export class NavbarComponent {
     // Simuler la connexion réussie
     this.isLoggedIn = true;
     this.closeLoginModal();
+
+    // Rediriger vers donate si on vient du modal de choix
+    if (this.redirectToDonateAfterAuth) {
+      this.redirectToDonateAfterAuth = false;
+      this.router.navigate(['/donate']);
+    }
   }
 
   // Signup modal methods
@@ -137,6 +146,12 @@ export class NavbarComponent {
     // Simuler l'inscription réussie
     this.isLoggedIn = true;
     this.closeSignupModal();
+
+    // Rediriger vers donate si on vient du modal de choix
+    if (this.redirectToDonateAfterAuth) {
+      this.redirectToDonateAfterAuth = false;
+      this.router.navigate(['/donate']);
+    }
   }
 
   // Switch between modals
