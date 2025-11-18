@@ -99,7 +99,7 @@ export class AdminComponent implements OnInit {
   }
 
   openAiPostMaker(): void {
-    const url = 'https://jofam.app.n8n.cloud/form/1c30918f-c0ca-4a86-9701-8877c81a6df8';
+    const url = 'https://www.google.ca'
     const title = 'AI Post Maker & Uploader (Shield of Athena)';
     const width = 900;
     const height = 700;
