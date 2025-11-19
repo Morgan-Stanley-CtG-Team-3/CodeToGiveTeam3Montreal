@@ -10,7 +10,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   styleUrls: ['./n8n-form.component.css']
 })
 export class N8nFormComponent {
-  private rawUrl = 'https://matte0des.app.n8n.cloud/form/voice-call-request';
+  private rawUrl = ''; // URL to n8n form
 
   openForm(){
     const url = new URL(this.rawUrl);
