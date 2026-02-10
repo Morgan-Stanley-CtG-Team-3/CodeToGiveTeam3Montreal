@@ -1,0 +1,54 @@
+# HTTP-HTTPS redirect
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name donatewithathena.com www.donatewithathena.com;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+
+    server_name donatewithathena.com www.donatewithathena.com;
+
+    # These will be populated by Certbot, but good to declare paths:
+    ssl_certificate     /etc/letsencrypt/live/donatewithathena.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/donatewithathena.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    client_max_body_size 10M;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_set_header Content-Length $content_length;
+        proxy_set_header Content-Type $content_type;
+    }
+
+    location /swagger-ui/ {
+        proxy_pass http://127.0.0.1:8080/swagger-ui/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8080/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
